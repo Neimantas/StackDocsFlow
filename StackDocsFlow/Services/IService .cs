@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace StackDocsFlow.Services
 {
-    public interface ITestService
+    interface IService
     {
+        List<Object> getListObject();
+        List<Object> getListById(int id);
+        List<Object> getListByName(string name);
     }
 }

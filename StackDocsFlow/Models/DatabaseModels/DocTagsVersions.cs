@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace StackDocsFlow.Models.DatabaseModels
 {
-    class DocTagsVersions
+    public class DocTagsVersions
     {
+        public long Id { get; set; }
+        public long DocTagId { get; set; }
+        public string Title { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastEditDate { get; set; }
     }
 }

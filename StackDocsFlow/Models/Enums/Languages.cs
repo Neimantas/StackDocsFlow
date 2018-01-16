@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StackDocsFlow.Services.Impl
+namespace StackDocsFlow.Models.Enums
 {
-    public class TestService : ITestService
+    enum Languages
     {
+          
     }
 }
+
