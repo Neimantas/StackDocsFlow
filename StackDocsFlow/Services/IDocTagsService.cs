@@ -11,7 +11,7 @@ namespace StackDocsFlow.Services
     interface IDocTagsService
     {
         List<DocTags> getDocTags();
-        DocTags getDocTagsById(string json, long id);
+        DocTags getDocTagsById(long id);
         List<DocTags> getDocTagsByLanguage(Languages languages, List<DocTags> docTags);
     }
 }

@@ -15,15 +15,16 @@ namespace StackDocsFlow.Services.Impl
 
         public List<DocTags> getDocTags()
         {
-          List<DocTags> list = databaseService.GetSQLData("select * from docTags"); 
+          List<DocTags> list = databaseService.GetDocTagsData("select * from docTags"); 
       return list;           
         }
 
 
 
-        public DocTags getDocTagsById(string json, long id)
+        public DocTags getDocTagsById(long id)
         {
-            throw new NotImplementedException();
+      List<DocTags> list = databaseService.GetDocTagsData("select * from docTags where id ="+id);
+      return list[0];
         }
 
         public List<DocTags> getDocTagsByLanguage(Languages languages, List<DocTags> docTags)

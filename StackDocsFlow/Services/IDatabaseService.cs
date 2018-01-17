@@ -10,7 +10,10 @@ namespace StackDocsFlow.Services
 {
     public interface IDatabaseService
     {
-    List<DocTags> GetSQLData(string comandText);
-    DateTime GetDateFromDouble(double number);
+    List<DocTags> GetDocTagsData(string commandText);
+    List<DocTagsVersions> GetDocTagVersionsData(string commandText);
+    List<Examples> GetExamplesData(string commandText);
+    List<Topic> GetTopicsData(string commandText);
+  
   }
 }
