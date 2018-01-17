@@ -36,7 +36,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.languageLabel = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -45,6 +44,9 @@
             this.ColumnId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnLanguage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.BackButton = new System.Windows.Forms.Button();
+            this.ForwardButton = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,13 +118,6 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "label3";
             // 
-            // languageLabel
-            // 
-            this.languageLabel.Location = new System.Drawing.Point(137, 49);
-            this.languageLabel.Name = "languageLabel";
-            this.languageLabel.Size = new System.Drawing.Size(100, 20);
-            this.languageLabel.TabIndex = 4;
-            // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(137, 132);
@@ -164,7 +159,7 @@
             this.ColumnLanguage});
             this.listView1.Location = new System.Drawing.Point(306, 49);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(650, 512);
+            this.listView1.Size = new System.Drawing.Size(650, 463);
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -183,17 +178,50 @@
             this.ColumnLanguage.Text = "Language";
             this.ColumnLanguage.Width = 279;
             // 
+            // BackButton
+            // 
+            this.BackButton.Location = new System.Drawing.Point(773, 519);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(75, 23);
+            this.BackButton.TabIndex = 10;
+            this.BackButton.Text = "<<";
+            this.BackButton.UseVisualStyleBackColor = true;
+            // 
+            // ForwardButton
+            // 
+            this.ForwardButton.Location = new System.Drawing.Point(881, 519);
+            this.ForwardButton.Name = "ForwardButton";
+            this.ForwardButton.Size = new System.Drawing.Size(75, 23);
+            this.ForwardButton.TabIndex = 11;
+            this.ForwardButton.Text = ">>";
+            this.ForwardButton.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "C#",
+            "Java",
+            "Swift",
+            "Javascript"});
+            this.comboBox1.Location = new System.Drawing.Point(137, 57);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ForwardButton);
+            this.Controls.Add(this.BackButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.showDataButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.languageLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -219,7 +247,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox languageLabel;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button1;
@@ -228,6 +255,9 @@
         private System.Windows.Forms.ColumnHeader ColumnId;
         private System.Windows.Forms.ColumnHeader ColumnTitle;
         private System.Windows.Forms.ColumnHeader ColumnLanguage;
+        private System.Windows.Forms.Button BackButton;
+        private System.Windows.Forms.Button ForwardButton;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
