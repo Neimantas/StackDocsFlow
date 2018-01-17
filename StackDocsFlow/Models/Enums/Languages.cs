@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StackDocsFlow.Models.DTO
+namespace StackDocsFlow.Models.Enums
 {
-    class AsSuDbBendrauju
+    public enum Languages
     {
+          
     }
 }
+

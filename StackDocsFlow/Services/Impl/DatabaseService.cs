@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StackDocsFlow.Services.Impl
 {
-    public class DatabaseService
+    public class DatabaseService : IDatabaseService
     {
         private void MakeConnection()
         {

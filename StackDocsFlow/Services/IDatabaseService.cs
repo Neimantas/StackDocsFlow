@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StackDocsFlow.Services.Impl
+namespace StackDocsFlow.Services
 {
-    public class TestService : ITestService
+    public interface IDatabaseService
     {
     }
 }
