@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +9,17 @@ using StackDocsFlow.Models.Enums;
 namespace StackDocsFlow.Services.Impl
 {
     class DocTagsServiceImpl : IDocTagsService
+
     {
-        public List<DocTags> getDocTags(string json)
+    IDatabaseService databaseService = new DatabaseService();
+
+        public List<DocTags> getDocTags()
         {
-            throw new NotImplementedException();
+          List<DocTags> list = databaseService.GetSQLData("select * from docTags"); 
+      return list;           
         }
+
+
 
         public DocTags getDocTagsById(string json, long id)
         {
