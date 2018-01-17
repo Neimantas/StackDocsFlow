@@ -35,10 +35,8 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.searchButton = new System.Windows.Forms.Button();
             this.showDataButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.ColumnId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -46,7 +44,7 @@
             this.ColumnLanguage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BackButton = new System.Windows.Forms.Button();
             this.ForwardButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,45 +103,30 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(46, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
+            this.label2.Text = "Topic";
             // 
-            // label3
+            // searchTextBox
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 132);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "label3";
+            this.searchTextBox.Location = new System.Drawing.Point(137, 91);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(121, 20);
+            this.searchTextBox.TabIndex = 6;
             // 
-            // textBox2
+            // searchButton
             // 
-            this.textBox2.Location = new System.Drawing.Point(137, 132);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 5;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(137, 91);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 6;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(49, 181);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
+            this.searchButton.Location = new System.Drawing.Point(49, 138);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.TabIndex = 7;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // showDataButton
             // 
-            this.showDataButton.Location = new System.Drawing.Point(161, 181);
+            this.showDataButton.Location = new System.Drawing.Point(183, 138);
             this.showDataButton.Name = "showDataButton";
             this.showDataButton.Size = new System.Drawing.Size(75, 23);
             this.showDataButton.TabIndex = 8;
@@ -196,33 +179,31 @@
             this.ForwardButton.Text = ">>";
             this.ForwardButton.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // languageComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.languageComboBox.FormattingEnabled = true;
+            this.languageComboBox.Items.AddRange(new object[] {
             "C#",
             "Java",
             "Swift",
             "Javascript"});
-            this.comboBox1.Location = new System.Drawing.Point(137, 57);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 12;
+            this.languageComboBox.Location = new System.Drawing.Point(137, 57);
+            this.languageComboBox.Name = "languageComboBox";
+            this.languageComboBox.Size = new System.Drawing.Size(121, 21);
+            this.languageComboBox.TabIndex = 12;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 729);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.languageComboBox);
             this.Controls.Add(this.ForwardButton);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.showDataButton);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
@@ -246,10 +227,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox searchTextBox;
+        private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button showDataButton;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader ColumnId;
@@ -257,7 +236,7 @@
         private System.Windows.Forms.ColumnHeader ColumnLanguage;
         private System.Windows.Forms.Button BackButton;
         private System.Windows.Forms.Button ForwardButton;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox languageComboBox;
     }
 }
 
