@@ -18,17 +18,18 @@ namespace StackDocsFlow
         [STAThread]
         static void Main()
         {
-      IDataConnection connection = new DataConnection();
-     // DataTable dt = connection.selectQuery("select strftime('%m/%d/%Y',substr(creationDate,0,20)) from docTags");
-      DataTable dt = connection.selectQuery("select id, title from docTags");
-      //    DataTable dt = connection.selectQuery("select title from docTags");
+      DataConnection connection = new DataConnection();
+      connection.selectQuery("select * from docTags");
 
-      foreach (DataRow row in dt.Rows)
-      {
-        //string x = row["creationDate"].ToString();
-        //     var f = 4;
-        Console.Write(row);
-      }
+      //var m_dbConnection =
+      //new SQLiteConnection(@"Data Source=C\Users\marius\source\repos\SeeProject\StackDocsFlow\ExternalSources\maindb.db;Version=3;");
+      //m_dbConnection.Open();
+      //string sql = "select * from highscores order by score desc";
+      //SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+      //SQLiteDataReader reader = command.ExecuteReader();
+      //while (reader.Read())
+      //  Console.WriteLine("Name: " + reader["name"] + "\tScore: " + reader["score"]);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

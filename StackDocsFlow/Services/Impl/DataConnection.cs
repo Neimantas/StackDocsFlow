@@ -17,7 +17,7 @@ namespace StackDocsFlow.Services.Impl
     {
       string x = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
     //  string rootDir= System.IO.Directory.GetCurrentDirectory();
-      string pathName = x + "\\ExternalSources\\maindb.db";
+      string pathName = x + "\\ExternalSources\\slack.db";
       //  C: \Users\marius\source\repos\SeeProject\StackDocsFlow\ExternalSources\maindb.db
       sqlite = new SQLiteConnection("Data Source ="+pathName);
     }
