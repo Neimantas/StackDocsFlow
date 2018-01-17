@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StackDocsFlow.Models.Enums
 {
-    enum Languages
+    public enum Languages
     {
           
     }
