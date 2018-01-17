@@ -34,6 +34,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.84.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExternalSources\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +59,8 @@
     <Compile Include="Models\DTO\AsSuDbBendrauju.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IDataConnection.cs" />
+    <Compile Include="Services\Impl\DataConnection.cs" />
     <Compile Include="Services\Impl\TestService..cs" />
     <Compile Include="Services\ITestService.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">
@@ -85,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExternalSources\System.Data.SQLite.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
