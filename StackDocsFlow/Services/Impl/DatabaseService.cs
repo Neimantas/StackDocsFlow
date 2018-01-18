@@ -53,7 +53,10 @@ namespace StackDocsFlow.Services.Impl
         docVersion.DocTagId = reader.GetInt64(1);
         docVersion.Title = reader.GetString(2);
         docVersion.CreationDate = GetDateFromDouble(reader.GetDouble(3));
-        docVersion.LastEditDate = GetDateFromDouble(reader.GetDouble(4));
+        if (!reader.IsDBNull(5))
+        {
+          docVersion.LastEditDate = GetDateFromDouble(reader.GetDouble(4));
+        }
         list.Add(docVersion);
       }
 
@@ -78,7 +81,10 @@ namespace StackDocsFlow.Services.Impl
         example.Title = reader.GetString(2);
         example.Description = reader.GetString(3);
         example.CeationDate = GetDateFromDouble(reader.GetDouble(4));
-        example.LastEditDate = GetDateFromDouble(reader.GetDouble(5));
+        if (!reader.IsDBNull(5))
+        {
+          example.LastEditDate = GetDateFromDouble(reader.GetDouble(5));
+        }
         list.Add(example);
       }
         sql_con.Close();
@@ -102,7 +108,10 @@ namespace StackDocsFlow.Services.Impl
         topic.Title = reader.GetString(2);
         topic.Answer = reader.GetString(3);
         topic.CreationDate = GetDateFromDouble(reader.GetDouble(4));
-        topic.LastEditDate = GetDateFromDouble(reader.GetDouble(5));
+        if (!reader.IsDBNull(5))
+        {
+          topic.LastEditDate = GetDateFromDouble(reader.GetDouble(5));
+        }
       }
 
         sql_con.Close();
@@ -112,9 +121,9 @@ namespace StackDocsFlow.Services.Impl
     public DateTime GetDateFromDouble(double number)
     {
       System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-      if(number < 1)
+      if(number == 0)
       {
-        return dtDateTime;
+        return dtDateTime.AddSeconds(10).ToLocalTime(); ;
       }
       return  dtDateTime.AddSeconds(number / 1000).ToLocalTime();
       // throw new NotImplementedException();

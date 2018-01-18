@@ -82,12 +82,14 @@
     <Compile Include="Services\IAnswerService.cs" />
     <Compile Include="Services\IDatabaseService.cs" />
     <Compile Include="Services\IDocTagsService.cs" />
+    <Compile Include="Services\IDocTagsVersionsService.cs" />
     <Compile Include="Services\IExampleService .cs" />
     <Compile Include="Services\ILanguageService .cs" />
     <Compile Include="Services\Impl\AnswerServiceImpl .cs" />
     <Compile Include="Services\Impl\DatabaseService.cs" />
     <Compile Include="Services\Impl\DocTagsServiceImpl.cs" />
     <Compile Include="Services\Impl\ExampleServiceImpl .cs" />
+    <Compile Include="Services\Impl\DocTagsVersionsServiceImpl.cs" />
     <Compile Include="Services\Impl\LanguageServiceImpl .cs" />
     <Compile Include="Services\Impl\Service.cs" />
     <Compile Include="Services\Impl\TopicsService.cs" />

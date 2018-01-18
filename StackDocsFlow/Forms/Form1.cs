@@ -1,4 +1,4 @@
-﻿using StackDocsFlow.Models.DatabaseModels;
+using StackDocsFlow.Models.DatabaseModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
