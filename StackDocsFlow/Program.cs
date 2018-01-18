@@ -29,15 +29,12 @@ namespace StackDocsFlow
         }
     private static void Bootstrap()
     {
-      // Create the container as usual.
       container = new Container();
-
-      // Register your types, for instance:
       container.Register<IDocTagsService, DocTagsServiceImpl>(Lifestyle.Transient);
-      //container.Register<IUserContext, WinFormsUserContext>();
+      container.Register<IDocTagsVersionsService, DocTagsVersionsServiceImpl>(Lifestyle.Transient);
+      container.Register<ITopicsService, TopicsService>(Lifestyle.Transient);
+      container.Register<IExampleService, ExampleServiceImpl>(Lifestyle.Transient);
       container.Register<Form1>();
-
-      // Optionally verify the container.
       //container.Verify();
     }
 
