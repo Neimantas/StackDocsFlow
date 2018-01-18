@@ -1,4 +1,4 @@
-﻿using StackDocsFlow.Models.DatabaseModels;
+using StackDocsFlow.Models.DatabaseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace StackDocsFlow.Services
 {
     interface IExampleService
     {
-        List<Examples> getExampleList(string json);
-        List<Examples> getExampleByTipicId(List<Examples> exampleList, long topicExampleId);
+        List<Examples> GetExampleList();
+        List<Examples> GetExampleByTipicId(List<Examples> exampleList, long topicExampleId);
     }
 }

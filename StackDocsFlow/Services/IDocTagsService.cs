@@ -10,8 +10,8 @@ namespace StackDocsFlow.Services
 {
     interface IDocTagsService
     {
-        List<DocTags> getDocTags();
-        DocTags getDocTagsById(long id);
-        List<DocTags> getDocTagsByLanguage(Languages languages, List<DocTags> docTags);
+        List<DocTags> GetDocTags();
+        DocTags GetDocTagsById(long id);
+        List<DocTags> GetDocTagsByLanguage(Languages languages, List<DocTags> docTags);
     }
 }

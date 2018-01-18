@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,19 +10,25 @@ namespace StackDocsFlow.Services.Impl
 {
     class TopicsService : ITopicsService
     {
+
+        IDatabaseService databaseService = new DatabaseService();
+
         public List<Topic> findTopicByLanguage(List<Topic> topics, Languages languages, string keyword)
         {
             throw new NotImplementedException();
         }
 
-        public Topic getTopicById(List<Topic> topics, long id)
+        public Topic getTopicById(long id)
         {
-            throw new NotImplementedException();
-        }
+      List<Topic> list = databaseService.GetTopicsData("select * from testJson where id="+id);
+      return list[0];
+    }
 
-        public List<Topic> getTopics(string json)
+        public List<Topic> getTopics()
         {
-            throw new NotImplementedException();
+
+      List<Topic> list = databaseService.GetTopicsData("select * from testJson");
+      return list;
         }
 
         public List<Topic> getTopicsByPage(List<Topic> listTopic, int start)

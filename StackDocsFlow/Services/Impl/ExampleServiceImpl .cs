@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +9,18 @@ namespace StackDocsFlow.Services.Impl
 {
     class ExampleServiceImpl : IExampleService
     {
-        public List<Examples> getExampleByTipicId(List<Examples> exampleList, long topicExampleId)
+
+    IDatabaseService databaseService = new DatabaseService();
+
+    public List<Examples> GetExampleByTipicId(List<Examples> exampleList, long topicExampleId)
         {
             throw new NotImplementedException();
         }
 
-        public List<Examples> getExampleList(string json)
+        public List<Examples> GetExampleList()
         {
-            throw new NotImplementedException();
+      List<Examples> list = databaseService.GetExamplesData("select * from examples");
+      return list;
         }
     }
 }
