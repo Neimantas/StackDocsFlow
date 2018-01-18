@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StackDocsFlow.Services
 {
-    interface IDocTagsService
+  public  interface IDocTagsService
     {
         List<DocTags> GetDocTags();
         DocTags GetDocTagsById(long id);

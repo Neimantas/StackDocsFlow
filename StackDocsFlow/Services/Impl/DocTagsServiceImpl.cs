@@ -8,7 +8,7 @@ using StackDocsFlow.Models.Enums;
 
 namespace StackDocsFlow.Services.Impl
 {
-    class DocTagsServiceImpl : IDocTagsService
+  public  class DocTagsServiceImpl : IDocTagsService
 
     {
     IDatabaseService databaseService = new DatabaseService();

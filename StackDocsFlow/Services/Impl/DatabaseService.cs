@@ -112,6 +112,7 @@ namespace StackDocsFlow.Services.Impl
         {
           topic.LastEditDate = GetDateFromDouble(reader.GetDouble(5));
         }
+        list.Add(topic);
       }
 
         sql_con.Close();
