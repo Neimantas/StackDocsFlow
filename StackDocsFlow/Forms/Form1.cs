@@ -28,13 +28,15 @@ namespace StackDocsFlow
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            listLoadedInListView = _docTagsService.GetDocTags();
+            listLoadedInListView = _docTagsService.GetOnePageList(1);
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
+
+
 
         private void showDataButton_Click(object sender, EventArgs e)
         {
@@ -87,19 +89,51 @@ namespace StackDocsFlow
 
         private void ForwardButton_Click(object sender, EventArgs e)
         {
-
             pageNumber++;
-            //listLoadedInListView = _docTagsService
-            //listView1.Items.Add();
+            string languageFilter = languageComboBox.Text;
+
+            if (languageFilter.Equals(""))
+            {
+                listLoadedInListView = _docTagsService.GetOnePageList(pageNumber);
+            }
+            else
+            {
+                listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
+            }
+
+            listView1.Items.Clear();
+
+            foreach (DocTags listItem in listLoadedInListView)
+            {
+                string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
+                ListViewItem listViewItem = new ListViewItem(item);
+                listView1.Items.Add(listViewItem);
+            }
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
             if (pageNumber > 1)
             {
-                pageNumber--;
-                //listLoadedInListView = _docTagsService
-                //listView1.Items.Add();
+
+                string languageFilter = languageComboBox.Text;
+                if (languageFilter.Equals(""))
+                {
+                    listLoadedInListView = _docTagsService.GetOnePageList(pageNumber);
+                }
+                else
+                {
+                    listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
+                }
+
+                listView1.Items.Clear();
+
+                foreach (DocTags listItem in listLoadedInListView)
+                {
+                    string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
+                    ListViewItem listViewItem = new ListViewItem(item);
+                    listView1.Items.Add(listViewItem);
+                }
             }
 
         }
