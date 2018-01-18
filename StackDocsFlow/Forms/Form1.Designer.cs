@@ -169,6 +169,7 @@
             this.BackButton.TabIndex = 10;
             this.BackButton.Text = "<<";
             this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // ForwardButton
             // 
@@ -178,6 +179,7 @@
             this.ForwardButton.TabIndex = 11;
             this.ForwardButton.Text = ">>";
             this.ForwardButton.UseVisualStyleBackColor = true;
+            this.ForwardButton.Click += new System.EventHandler(this.ForwardButton_Click);
             // 
             // languageComboBox
             // 

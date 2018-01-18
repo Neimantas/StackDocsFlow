@@ -14,19 +14,22 @@ namespace StackDocsFlow
 {
     public partial class Form1 : Form
     {
+        int pageNumber;
         List<DocTags> listLoadedInListView;
-        private readonly  IDocTagsService _docTagsService;
 
-       public Form1(IDocTagsService docTagsService)
+        private readonly IDocTagsService _docTagsService;
+
+        public Form1(IDocTagsService docTagsService)
         {
+            pageNumber = 1;
             _docTagsService = docTagsService;
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-      listLoadedInListView = _docTagsService.GetDocTags();
-    }
+            listLoadedInListView = _docTagsService.GetDocTags();
+        }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -35,11 +38,9 @@ namespace StackDocsFlow
 
         private void showDataButton_Click(object sender, EventArgs e)
         {
-           
-
             listView1.Items.Clear();
 
-     
+
             foreach (DocTags listItem in listLoadedInListView)
             {
                 string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
@@ -82,6 +83,25 @@ namespace StackDocsFlow
                 }
             }
             return filteredListByLanguage;
-        } 
+        }
+
+        private void ForwardButton_Click(object sender, EventArgs e)
+        {
+
+            pageNumber++;
+            //listLoadedInListView = _docTagsService
+            //listView1.Items.Add();
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            if (pageNumber > 1)
+            {
+                pageNumber--;
+                //listLoadedInListView = _docTagsService
+                //listView1.Items.Add();
+            }
+
+        }
     }
 }

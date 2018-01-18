@@ -98,6 +98,8 @@
     <Compile Include="Services\Impl\TopicsService.cs" />
     <Compile Include="Services\IService .cs" />
     <Compile Include="Services\ITopicsService .cs" />
+    <Compile Include="TestService\Impl\Test1.cs" />
+    <Compile Include="TestService\ITest1.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
