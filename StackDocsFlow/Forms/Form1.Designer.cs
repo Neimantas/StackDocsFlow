@@ -45,6 +45,8 @@
             this.BackButton = new System.Windows.Forms.Button();
             this.ForwardButton = new System.Windows.Forms.Button();
             this.languageComboBox = new System.Windows.Forms.ComboBox();
+            this.databaseComboBox = new System.Windows.Forms.ComboBox();
+            this.databaseLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,7 +118,7 @@
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(49, 138);
+            this.searchButton.Location = new System.Drawing.Point(49, 172);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(75, 23);
             this.searchButton.TabIndex = 7;
@@ -126,7 +128,7 @@
             // 
             // showDataButton
             // 
-            this.showDataButton.Location = new System.Drawing.Point(183, 138);
+            this.showDataButton.Location = new System.Drawing.Point(183, 172);
             this.showDataButton.Name = "showDataButton";
             this.showDataButton.Size = new System.Drawing.Size(75, 23);
             this.showDataButton.TabIndex = 8;
@@ -140,7 +142,7 @@
             this.ColumnId,
             this.ColumnTitle,
             this.ColumnLanguage});
-            this.listView1.Location = new System.Drawing.Point(306, 49);
+            this.listView1.Location = new System.Drawing.Point(306, 27);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(650, 463);
             this.listView1.TabIndex = 9;
@@ -194,11 +196,35 @@
             this.languageComboBox.Size = new System.Drawing.Size(121, 21);
             this.languageComboBox.TabIndex = 12;
             // 
+            // databaseComboBox
+            // 
+            this.databaseComboBox.FormattingEnabled = true;
+            this.databaseComboBox.Items.AddRange(new object[] {
+            "DocTags",
+            "DocTagsVersions",
+            "Examples",
+            "Topic"});
+            this.databaseComboBox.Location = new System.Drawing.Point(137, 126);
+            this.databaseComboBox.Name = "databaseComboBox";
+            this.databaseComboBox.Size = new System.Drawing.Size(121, 21);
+            this.databaseComboBox.TabIndex = 13;
+            // 
+            // databaseLabel
+            // 
+            this.databaseLabel.AutoSize = true;
+            this.databaseLabel.Location = new System.Drawing.Point(46, 129);
+            this.databaseLabel.Name = "databaseLabel";
+            this.databaseLabel.Size = new System.Drawing.Size(53, 13);
+            this.databaseLabel.TabIndex = 14;
+            this.databaseLabel.Text = "Database";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.databaseLabel);
+            this.Controls.Add(this.databaseComboBox);
             this.Controls.Add(this.languageComboBox);
             this.Controls.Add(this.ForwardButton);
             this.Controls.Add(this.BackButton);
@@ -239,6 +265,8 @@
         private System.Windows.Forms.Button BackButton;
         private System.Windows.Forms.Button ForwardButton;
         private System.Windows.Forms.ComboBox languageComboBox;
+        private System.Windows.Forms.ComboBox databaseComboBox;
+        private System.Windows.Forms.Label databaseLabel;
     }
 }
 

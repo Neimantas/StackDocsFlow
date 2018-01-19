@@ -62,7 +62,8 @@ namespace StackDocsFlow
         private void searchButton_Click(object sender, EventArgs e)
         {
             listView1.Items.Clear();
-            List<DocTags> filteredListByLanguage = FilteredListByLanguage(listLoadedInListView);
+            string languageFilter = languageComboBox.Text;
+            List<DocTags> filteredListByLanguage = _docTagsService.GetOnePageList("Swift", 0);
 
             foreach (DocTags listItem in filteredListByLanguage)
             {
@@ -72,20 +73,20 @@ namespace StackDocsFlow
             }
         }
 
-        public List<DocTags> FilteredListByLanguage(List<DocTags> unfilteredList)
-        {
-            List<DocTags> filteredListByLanguage = new List<DocTags>();
-            string languageFilter = languageComboBox.Text;
+        //public List<DocTags> FilteredListByLanguage(List<DocTags> unfilteredList)
+        //{
+        //    List<DocTags> filteredListByLanguage = new List<DocTags>();
+        //    string languageFilter = languageComboBox.Text;
 
-            foreach (DocTags listItem in listLoadedInListView)
-            {
-                if (listItem.Title.Equals(languageFilter))
-                {
-                    filteredListByLanguage.Add(listItem);
-                }
-            }
-            return filteredListByLanguage;
-        }
+        //    foreach (DocTags listItem in listLoadedInListView)
+        //    {
+        //        if (listItem.Title.Equals(languageFilter))
+        //        {
+        //            filteredListByLanguage.Add(listItem);
+        //        }
+        //    }
+        //    return filteredListByLanguage;
+        //}
 
         private void ForwardButton_Click(object sender, EventArgs e)
         {
@@ -98,7 +99,7 @@ namespace StackDocsFlow
             }
             else
             {
-                listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
+                listLoadedInListView = _docTagsService.GetOnePageList(languageFilter ,pageNumber);
             }
 
             listView1.Items.Clear();
@@ -115,7 +116,7 @@ namespace StackDocsFlow
         {
             if (pageNumber > 1)
             {
-
+                pageNumber--;
                 string languageFilter = languageComboBox.Text;
                 if (languageFilter.Equals(""))
                 {
@@ -135,7 +136,6 @@ namespace StackDocsFlow
                     listView1.Items.Add(listViewItem);
                 }
             }
-
         }
     }
 }
