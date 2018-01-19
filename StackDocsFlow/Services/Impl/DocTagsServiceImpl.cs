@@ -52,5 +52,11 @@ namespace StackDocsFlow.Services.Impl
     {
       return databaseService.GetDataCount("docTags");
     }
+
+    public List<Topic> GetTopics(string id)
+    {
+      List<Topic> list = databaseService.GetTopicsData("SELECT * FROM testJson where docTagId = " +id);
+      return list;
+    }
   }
 }

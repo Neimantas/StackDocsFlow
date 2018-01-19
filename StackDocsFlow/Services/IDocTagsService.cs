@@ -16,6 +16,7 @@ namespace StackDocsFlow.Services
 
     int GetPageCount();
 
+    List<Topic> GetTopics(string id);
     List<DocTags> GetDocTagsByLanguage(Languages languages, List<DocTags> docTags);
   }
 }

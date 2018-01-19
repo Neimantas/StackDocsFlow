@@ -119,8 +119,8 @@ namespace StackDocsFlow
         {
             if (pageNumber > 1)
             {
-
-                string languageFilter = languageComboBox.Text;
+        pageNumber--;
+        string languageFilter = languageComboBox.Text;
                 if (languageFilter.Equals(""))
                 {
                     listLoadedInListView = _docTagsService.GetOnePageList(pageNumber);
