@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StackDocsFlow.Services.Impl
 {
-  class DocTagsVersionsServiceImpl : IDocTagsVersionsService
+  public class DocTagsVersionsServiceImpl : IDocTagsVersionsService
   {
 
     IDatabaseService databaseService = new DatabaseService();
@@ -22,6 +22,24 @@ namespace StackDocsFlow.Services.Impl
     {
       List<DocTagsVersions> list = databaseService.GetDocTagVersionsData("select * from docTagsVersions");
       return list;
+    }
+
+    public List<DocTagsVersions> GetOnePageList(string language, int page)
+    {
+      throw new NotImplementedException();
+    }
+
+    public List<DocTagsVersions> GetOnePageList(int page)
+    {
+      page--;
+      int off = page > 0 ? (20 * page) : 0;
+      List<DocTagsVersions> list = databaseService.GetDocTagVersionsData("SELECT * FROM docTagsVersions limit 20 offset " + off);
+      return list;
+    }
+
+    public int GetPageCount()
+    {
+      return databaseService.GetDataCount("docTagsVersions");
     }
   }
 }
