@@ -14,6 +14,7 @@ namespace StackDocsFlow.Services
         DocTags GetDocTagsById(long id);
         List<DocTags> GetOnePageList(string language, int page);
         List<DocTags> GetOnePageList(int page);
+        int GetPageCount();
     List<DocTags> GetDocTagsByLanguage(Languages languages, List<DocTags> docTags);
     }
 }
