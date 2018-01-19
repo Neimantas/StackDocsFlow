@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StackDocsFlow.Services
 {
-  interface IDocTagsVersionsService
+  public interface IDocTagsVersionsService
   {
     List<DocTagsVersions> GetDocTagsVersions();
     DocTagsVersions DocTagsVersions(long id);

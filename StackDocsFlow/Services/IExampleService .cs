@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StackDocsFlow.Services
 {
-    interface IExampleService
+    public interface IExampleService
     {
         List<Examples> GetExampleList();
         List<Examples> GetExampleByTipicId(List<Examples> exampleList, long topicExampleId);

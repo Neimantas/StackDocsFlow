@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StackDocsFlow.Services
 {
-    interface ITopicsService
+    public interface ITopicsService
     {
         List<Topic> getTopics();
         Topic getTopicById(long id);
