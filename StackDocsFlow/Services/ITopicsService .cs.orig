@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace StackDocsFlow.Services
 {
-    public interface ITopicsService
+<<<<<<< HEAD
+  public interface ITopicsService
   {
     List<Topic> getTopics();
 
@@ -18,4 +19,13 @@ namespace StackDocsFlow.Services
 
     List<Topic> findTopicByLanguage(Languages languages, string keyword);
   }
+=======
+    public interface ITopicsService
+    {
+        List<Topic> getTopics();
+        Topic getTopicById(long id);
+        List<Topic> findTopicByLanguage(List<Topic> topics, Languages languages, string keyword);
+        List<Topic> getTopicsByPage(List<Topic> listTopic, int start);
+    }
+>>>>>>> jonas_dev3
 }

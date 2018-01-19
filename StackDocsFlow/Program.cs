@@ -2,6 +2,8 @@ using SimpleInjector;
 using StackDocsFlow.Models.DatabaseModels;
 using StackDocsFlow.Services;
 using StackDocsFlow.Services.Impl;
+using StackDocsFlow.TestService;
+using StackDocsFlow.TestService.Impl;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -23,7 +25,7 @@ namespace StackDocsFlow
         {
             
             Application.EnableVisualStyles();
-      Bootstrap();
+            Bootstrap();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(container.GetInstance<Form1>());
         }
@@ -34,6 +36,7 @@ namespace StackDocsFlow
       container.Register<IDocTagsVersionsService, DocTagsVersionsServiceImpl>(Lifestyle.Transient);
       container.Register<ITopicsService, TopicsService>(Lifestyle.Transient);
       container.Register<IExampleService, ExampleServiceImpl>(Lifestyle.Transient);
+      container.Register<ITest1, Test1>(Lifestyle.Transient);
       container.Register<Form1>();
       //container.Verify();
     }

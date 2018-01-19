@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace StackDocsFlow.TestService
 {
     public interface ITest1
     {
-        List<DocTags> getPageList(string Language, int pageCount);
+        void AddColumsToListViewAccordingToDatabase(string database, ListView listView);
     }
 }

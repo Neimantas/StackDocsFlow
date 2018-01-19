@@ -39,9 +39,6 @@
             this.searchButton = new System.Windows.Forms.Button();
             this.showDataButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.ColumnId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnLanguage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BackButton = new System.Windows.Forms.Button();
             this.ForwardButton = new System.Windows.Forms.Button();
             this.languageComboBox = new System.Windows.Forms.ComboBox();
@@ -138,30 +135,12 @@
             // 
             // listView1
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ColumnId,
-            this.ColumnTitle,
-            this.ColumnLanguage});
             this.listView1.Location = new System.Drawing.Point(306, 27);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(650, 463);
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // ColumnId
-            // 
-            this.ColumnId.Text = "Id";
-            // 
-            // ColumnTitle
-            // 
-            this.ColumnTitle.Text = "Title";
-            this.ColumnTitle.Width = 241;
-            // 
-            // ColumnLanguage
-            // 
-            this.ColumnLanguage.Text = "Language";
-            this.ColumnLanguage.Width = 279;
             // 
             // BackButton
             // 
@@ -208,6 +187,7 @@
             this.databaseComboBox.Name = "databaseComboBox";
             this.databaseComboBox.Size = new System.Drawing.Size(121, 21);
             this.databaseComboBox.TabIndex = 13;
+            this.databaseComboBox.SelectedIndexChanged += new System.EventHandler(this.databaseComboBox_TextChanged);
             // 
             // databaseLabel
             // 
@@ -259,9 +239,6 @@
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button showDataButton;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader ColumnId;
-        private System.Windows.Forms.ColumnHeader ColumnTitle;
-        private System.Windows.Forms.ColumnHeader ColumnLanguage;
         private System.Windows.Forms.Button BackButton;
         private System.Windows.Forms.Button ForwardButton;
         private System.Windows.Forms.ComboBox languageComboBox;
