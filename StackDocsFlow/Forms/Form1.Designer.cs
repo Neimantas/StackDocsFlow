@@ -135,12 +135,14 @@
             // 
             // listView1
             // 
+            this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listView1.Location = new System.Drawing.Point(306, 27);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(650, 463);
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.ItemActivate += new System.EventHandler(this.listView1_ItemActivate);
             // 
             // BackButton
             // 
