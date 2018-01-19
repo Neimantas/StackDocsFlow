@@ -38,7 +38,7 @@ namespace StackDocsFlow
         private void Form1_Load(object sender, EventArgs e)
         {
             listLoadedInListView = _docTagsService.GetOnePageList(1);
-            databaseComboBox.SelectedIndex = 3;
+            databaseComboBox.SelectedIndex = 0;
             _test1.AddColumsToListViewAccordingToDatabase("DocTags", listView1);
         }
 
@@ -152,12 +152,23 @@ namespace StackDocsFlow
 
         private void listView1_ItemActivate(Object sender, EventArgs e)
         {
+            string id = listView1.SelectedItems[0].Text;
+            List<Topic> topicList = _docTagsService.GetTopics(id);
+            listView1.Items.Clear();
+            _test1.AddColumsToListViewAccordingToDatabase("Topic", listView1);
 
-            string item = listView1.SelectedItems[0].Text;
-            MessageBox.Show(item);
+            foreach (Topic listItem in topicList)
+            {
+                string[] item = { Convert.ToString(listItem.Id), Convert.ToString(listItem.DocTagId),
+                    listItem.Title, listItem.Answer, Convert.ToString(listItem.CreationDate), Convert.ToString(listItem.LastEditDate) };
+                ListViewItem listViewItem = new ListViewItem(item);
+                listView1.Items.Add(listViewItem);
+            }
+        }
 
-
-
+        private void listView1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("You are in the ListView.ItemActivate event.");
         }
     }
 }
