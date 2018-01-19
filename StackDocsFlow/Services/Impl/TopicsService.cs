@@ -9,17 +9,7 @@ namespace StackDocsFlow.Services.Impl
   {
     private IDatabaseService databaseService = new DatabaseService();
 
-    public List<Topic> findTopicByLanguage(List<Topic> topics, Languages languages, string keyword)
-    {
-      throw new NotImplementedException();
-    }
-
     public List<Topic> findTopicByLanguage(Languages languages, string keyword)
-    {
-      throw new NotImplementedException();
-    }
-
-    public List<Topic> GetOnePageList(string language, int page)
     {
       throw new NotImplementedException();
     }
@@ -30,6 +20,11 @@ namespace StackDocsFlow.Services.Impl
       int off = page > 0 ? (20 * page) : 0;
       List<Topic> list = databaseService.GetTopicsData("SELECT * FROM testJson limit 20 offset " + off);
       return list;
+    }
+
+    public List<Topic> GetOnePageList(string language, int page)
+    {
+      throw new NotImplementedException();
     }
 
     public int GetPageCount()
@@ -49,9 +44,5 @@ namespace StackDocsFlow.Services.Impl
       return list;
     }
 
-    public List<Topic> getTopicsByPage(List<Topic> listTopic, int start)
-    {
-      throw new NotImplementedException();
-    }
   }
 }

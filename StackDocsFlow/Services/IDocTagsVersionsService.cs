@@ -1,15 +1,18 @@
 using StackDocsFlow.Models.DatabaseModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StackDocsFlow.Services
 {
   public interface IDocTagsVersionsService
   {
     List<DocTagsVersions> GetDocTagsVersions();
+
     DocTagsVersions DocTagsVersions(long id);
+
+    List<DocTagsVersions> GetOnePageList(string language, int page);
+
+    List<DocTagsVersions> GetOnePageList(int page);
+
+    int GetPageCount();
   }
 }
