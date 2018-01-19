@@ -14,6 +14,7 @@ namespace StackDocsFlow.Services
     List<DocTagsVersions> GetDocTagVersionsData(string commandText);
     List<Examples> GetExamplesData(string commandText);
     List<Topic> GetTopicsData(string commandText);
+    int GetDataCount(string tableName);
   
   }
 }

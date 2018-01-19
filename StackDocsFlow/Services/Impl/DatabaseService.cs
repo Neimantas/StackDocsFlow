@@ -129,5 +129,22 @@ namespace StackDocsFlow.Services.Impl
       return  dtDateTime.AddSeconds(number / 1000).ToLocalTime();
       // throw new NotImplementedException();
     }
+
+    public int GetDataCount(string tableName)
+    { int count = 0;
+      List<Topic> list = new List<Topic>();
+      sql_con.Open();
+      var sql_cmd = sql_con.CreateCommand();
+      sql_cmd.CommandText = "SELECT COUNT(*) FROM "+ tableName;
+      sql_cmd.ExecuteNonQuery();
+      SQLiteDataReader reader = sql_cmd.ExecuteReader();
+      while (reader.Read())
+      {
+        count = reader.GetInt32(0);
+      }
+      sql_con.Close();
+    
+      return count;
+    }
   }
 }
