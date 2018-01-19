@@ -38,6 +38,8 @@ namespace StackDocsFlow
         private void Form1_Load(object sender, EventArgs e)
         {
             listLoadedInListView = _docTagsService.GetOnePageList(1);
+            databaseComboBox.SelectedIndex = 3;
+            _test1.AddColumsToListViewAccordingToDatabase("DocTags", listView1);
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -146,6 +148,16 @@ namespace StackDocsFlow
             string databaseName = databaseComboBox.Text;
 
             _test1.AddColumsToListViewAccordingToDatabase(databaseName, listView1);
+        }
+
+        private void listView1_ItemActivate(Object sender, EventArgs e)
+        {
+
+            string item = listView1.SelectedItems[0].Text;
+            MessageBox.Show(item);
+
+
+
         }
     }
 }
