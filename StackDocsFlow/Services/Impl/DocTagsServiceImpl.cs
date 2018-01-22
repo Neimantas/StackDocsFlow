@@ -8,23 +8,23 @@ using StackDocsFlow.Models.Enums;
 
 namespace StackDocsFlow.Services.Impl
 {
-  public  class DocTagsServiceImpl : IDocTagsService
+    public class DocTagsServiceImpl : IDocTagsService
 
     {
-    IDatabaseService databaseService = new DatabaseService();
+        IDatabaseService databaseService = new DatabaseService();
 
         public List<DocTags> GetDocTags()
         {
-          List<DocTags> list = databaseService.GetDocTagsData("select * from docTags"); 
-      return list;           
+            List<DocTags> list = databaseService.GetDocTagsData("select * from docTags");
+            return list;
         }
 
 
 
         public DocTags GetDocTagsById(long id)
         {
-      List<DocTags> list = databaseService.GetDocTagsData("select * from docTags where id ="+id);
-      return list[0];
+            List<DocTags> list = databaseService.GetDocTagsData("select * from docTags where id =" + id);
+            return list[0];
         }
 
         public List<DocTags> GetDocTagsByLanguage(Languages languages, List<DocTags> docTags)
@@ -32,31 +32,33 @@ namespace StackDocsFlow.Services.Impl
             throw new NotImplementedException();
         }
 
-    public List<DocTags> GetOnePageList(string language, int page)
-    {
-      page--;
-      int off =page>0 ?(20 * page) : 0;
-      List<DocTags> list = databaseService.GetDocTagsData("SELECT * FROM docTags where title like '%"+language+"%' limit 20 offset " +off);
-      return list;
-    }
+        public List<DocTags> GetOnePageList(string language, int page)
+        {
+            page--;
+            int off = page > 0 ? (20 * page) : 0;
+            List<DocTags> list = databaseService.GetDocTagsData("SELECT * FROM docTags where title like '%" + language + "%' limit 20 offset " + off);
+            return list;
+        }
 
-    public List<DocTags> GetOnePageList(int page)
-    {
-      page--;
-      int off = page > 0 ? (20 * page) : 0;
-      List<DocTags> list = databaseService.GetDocTagsData("SELECT * FROM docTags limit 20 offset " + off);
-      return list;
-    }
+        public List<DocTags> GetOnePageList(int page)
+        {
+            page--;
+            int off = page > 0 ? (20 * page) : 0;
+            List<DocTags> list = databaseService.GetDocTagsData("SELECT * FROM docTags limit 20 offset " + off);
+            return list;
+        }
 
-    public int GetPageCount()
-    {
-      return databaseService.GetDataCount("docTags");
-    }
+        public int GetPageCount()
+        {
+            return databaseService.GetDataCount("docTags");
+        }
 
-    public List<Topic> GetTopics(string id)
-    {
-      List<Topic> list = databaseService.GetTopicsData("SELECT * FROM testJson where docTagId = " +id);
-      return list;
+        public List<Topic> GetTopics(string id, int page)
+        {
+            page--;
+            int off = page > 0 ? (20 * page) : 0;
+            List<Topic> list = databaseService.GetTopicsData("SELECT * FROM testJson where docTagId = " + id + " limit 20 offset " + off);
+            return list;
+        }
     }
-  }
 }

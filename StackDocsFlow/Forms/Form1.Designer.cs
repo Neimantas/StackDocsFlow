@@ -143,7 +143,6 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ItemActivate += new System.EventHandler(this.listView1_ItemActivate);
-            this.listView1.Click += new System.EventHandler(this.listView1_Click);
             // 
             // BackButton
             // 

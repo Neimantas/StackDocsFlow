@@ -16,6 +16,7 @@ namespace StackDocsFlow
     public partial class Form1 : Form
     {
         int pageNumber;
+        string displayedItemsType;
         List<DocTags> listLoadedInListView;
 
         private readonly IDocTagsService _docTagsService;
@@ -26,6 +27,7 @@ namespace StackDocsFlow
 
         public Form1(IDocTagsService docTagsService, IDocTagsVersionsService docTagsVersionsService, IExampleService exampleService, ITopicsService topicsService, ITest1 test1)
         {
+            displayedItemsType = "DocTags";
             pageNumber = 1;
             _docTagsService = docTagsService;
             _docTagsVersionsService = docTagsVersionsService;
@@ -49,6 +51,7 @@ namespace StackDocsFlow
 
         private void showDataButton_Click(object sender, EventArgs e)
         {
+            displayedItemsType = "DocTags";
             listView1.Items.Clear();
 
             foreach (DocTags listItem in listLoadedInListView)
@@ -95,25 +98,30 @@ namespace StackDocsFlow
         }
         private void ForwardButton_Click(object sender, EventArgs e)
         {
-            pageNumber++;
-            string languageFilter = languageComboBox.Text;
+            int pageCount = _docTagsService.GetPageCount() / 20 + 1;
 
-            if (languageFilter.Equals(""))
+            if (pageNumber < pageCount)
             {
-                listLoadedInListView = _docTagsService.GetOnePageList(pageNumber);
-            }
-            else
-            {
-                listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
-            }
+                pageNumber++;
+                string languageFilter = languageComboBox.Text;
 
-            listView1.Items.Clear();
+                if (languageFilter.Equals(""))
+                {
+                    listLoadedInListView = _docTagsService.GetOnePageList(pageNumber);
+                }
+                else
+                {
+                    listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
+                }
 
-            foreach (DocTags listItem in listLoadedInListView)
-            {
-                string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
-                ListViewItem listViewItem = new ListViewItem(item);
-                listView1.Items.Add(listViewItem);
+                listView1.Items.Clear();
+
+                foreach (DocTags listItem in listLoadedInListView)
+                {
+                    string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
+                    ListViewItem listViewItem = new ListViewItem(item);
+                    listView1.Items.Add(listViewItem);
+                }
             }
         }
 
@@ -121,8 +129,9 @@ namespace StackDocsFlow
         {
             if (pageNumber > 1)
             {
-        pageNumber--;
-        string languageFilter = languageComboBox.Text;
+                pageNumber--;
+                string languageFilter = languageComboBox.Text;
+
                 if (languageFilter.Equals(""))
                 {
                     listLoadedInListView = _docTagsService.GetOnePageList(pageNumber);
@@ -153,22 +162,17 @@ namespace StackDocsFlow
         private void listView1_ItemActivate(Object sender, EventArgs e)
         {
             string id = listView1.SelectedItems[0].Text;
-            List<Topic> topicList = _docTagsService.GetTopics(id);
+            
+            List<ListViewItem> listViewItems = _test1.returnItemsListAccordingToSpecificType(displayedItemsType, id, pageNumber);
             listView1.Items.Clear();
             _test1.AddColumsToListViewAccordingToDatabase("Topic", listView1);
 
-            foreach (Topic listItem in topicList)
+            foreach (ListViewItem listViewItem in listViewItems)
             {
-                string[] item = { Convert.ToString(listItem.Id), Convert.ToString(listItem.DocTagId),
-                    listItem.Title, listItem.Answer, Convert.ToString(listItem.CreationDate), Convert.ToString(listItem.LastEditDate) };
-                ListViewItem listViewItem = new ListViewItem(item);
                 listView1.Items.Add(listViewItem);
             }
-        }
 
-        private void listView1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("You are in the ListView.ItemActivate event.");
+            displayedItemsType = "Topic";
         }
     }
 }
