@@ -22,6 +22,14 @@ namespace StackDocsFlow.TestService.Impl
 
         public void AddColumsToListViewAccordingToDatabase(string databaseName, ListView listView1)
         {
+            if (databaseName.Equals("Topic"))
+            {
+                databaseName = "Examples";
+            } else if (databaseName.Equals("DocTags"))
+            {
+                databaseName = "Topic";
+            } 
+
             switch(databaseName)
             {
                 case "DocTags":

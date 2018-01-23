@@ -130,6 +130,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\ViewDataModel\" />
     <Folder Include="TestService\Impl\" />
   </ItemGroup>
   <ItemGroup>

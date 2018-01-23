@@ -19,8 +19,6 @@ namespace StackDocsFlow.Services.Impl
             return list;
         }
 
-
-
         public DocTags GetDocTagsById(long id)
         {
             List<DocTags> list = databaseService.GetDocTagsData("select * from docTags where id =" + id);

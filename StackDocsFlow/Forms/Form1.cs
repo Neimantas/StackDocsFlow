@@ -58,6 +58,7 @@ namespace StackDocsFlow
             {
                 string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
                 ListViewItem listViewItem = new ListViewItem(item);
+                var a = listViewItem.Text.ToString();
                 listView1.Items.Add(listViewItem);
             }
 
@@ -132,6 +133,17 @@ namespace StackDocsFlow
                 pageNumber--;
                 string languageFilter = languageComboBox.Text;
 
+                //gaunam id, kurio ieskom
+                //kreipiames i db ir gaunam 1 atsakyma
+                //ta viena verciam musu objektu
+                //var vidinis = new AsVidinisObjektas();
+                //vidinis.Id 
+                //vidinas.Doctagas
+                //kraunam nauja forma 
+                //persiumca arba visa musu objekta, arba turima topicu id
+                //kraunam nauja forma pagal topiku 
+                //jeigu klikina i atsakyma, padarom ta pati, tik su atsakymo objektais
+
                 if (languageFilter.Equals(""))
                 {
                     listLoadedInListView = _docTagsService.GetOnePageList(pageNumber);
@@ -165,7 +177,8 @@ namespace StackDocsFlow
             
             List<ListViewItem> listViewItems = _test1.returnItemsListAccordingToSpecificType(displayedItemsType, id, pageNumber);
             listView1.Items.Clear();
-            _test1.AddColumsToListViewAccordingToDatabase("Topic", listView1);
+
+            _test1.AddColumsToListViewAccordingToDatabase(displayedItemsType, listView1);
 
             foreach (ListViewItem listViewItem in listViewItems)
             {
@@ -173,6 +186,7 @@ namespace StackDocsFlow
             }
 
             displayedItemsType = "Topic";
+            
         }
     }
 }
