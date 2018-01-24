@@ -161,10 +161,10 @@ namespace StackDocsFlow
         private void listView1_ItemActivate(Object sender, EventArgs e)
         {
             string id = listView1.SelectedItems[0].Text;
-
             ListViewItem item = listView1.SelectedItems[0];
-            var c = item.Tag;
-
+            var a = item.Tag;
+            Type b = a.GetType();
+            var c = b.Name;
             
 
             listView1.Items.Clear();
