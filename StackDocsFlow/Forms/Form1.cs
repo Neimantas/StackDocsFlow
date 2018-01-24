@@ -16,21 +16,17 @@ namespace StackDocsFlow
     public partial class Form1 : Form
     {
         int pageNumber;
-        string displayedItemsType;
         List<DocTags> listLoadedInListView;
 
         private readonly IDocTagsService _docTagsService;
-        private readonly IDocTagsVersionsService _docTagsVersionsService;
         private readonly IExampleService _exampleService;
         private readonly ITopicsService _topicsService;
         private readonly ITest1 _test1;
 
-        public Form1(IDocTagsService docTagsService, IDocTagsVersionsService docTagsVersionsService, IExampleService exampleService, ITopicsService topicsService, ITest1 test1)
+        public Form1(IDocTagsService docTagsService, IExampleService exampleService, ITopicsService topicsService, ITest1 test1)
         {
-            displayedItemsType = "DocTags";
             pageNumber = 1;
             _docTagsService = docTagsService;
-            _docTagsVersionsService = docTagsVersionsService;
             _exampleService = exampleService;
             _topicsService = topicsService;
             _test1 = test1;
@@ -39,26 +35,17 @@ namespace StackDocsFlow
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            listLoadedInListView = _docTagsService.GetOnePageList(1);
-            databaseComboBox.SelectedIndex = 0;
-            _test1.AddColumsToListViewAccordingToDatabase("DocTags", listView1);
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
+            
         }
 
         private void showDataButton_Click(object sender, EventArgs e)
         {
-            displayedItemsType = "DocTags";
-            listView1.Items.Clear();
+            _test1.AddColumsToListViewAccordingToDataModel("DocTags", listView1);
 
-            foreach (DocTags listItem in listLoadedInListView)
+            List<ListViewItem> listViewItemList = _test1.returnItemsListAccordingToSpecificType("DocTags", "#notUsed", 1);
+
+            foreach (ListViewItem listViewItem in listViewItemList)
             {
-                string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
-                ListViewItem listViewItem = new ListViewItem(item);
-                var a = listViewItem.Text.ToString();
                 listView1.Items.Add(listViewItem);
             }
 
@@ -112,7 +99,7 @@ namespace StackDocsFlow
                 }
                 else
                 {
-                    listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
+                    //listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
                 }
 
                 listView1.Items.Clear();
@@ -150,7 +137,7 @@ namespace StackDocsFlow
                 }
                 else
                 {
-                    listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
+                    //listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
                 }
 
                 listView1.Items.Clear();
@@ -168,25 +155,35 @@ namespace StackDocsFlow
         {
             string databaseName = databaseComboBox.Text;
 
-            _test1.AddColumsToListViewAccordingToDatabase(databaseName, listView1);
+            _test1.AddColumsToListViewAccordingToDataModel(databaseName, listView1);
         }
 
         private void listView1_ItemActivate(Object sender, EventArgs e)
         {
             string id = listView1.SelectedItems[0].Text;
+
+            ListViewItem item = listView1.SelectedItems[0];
+            var c = item.Tag;
+
             
-            List<ListViewItem> listViewItems = _test1.returnItemsListAccordingToSpecificType(displayedItemsType, id, pageNumber);
+
             listView1.Items.Clear();
-
-            _test1.AddColumsToListViewAccordingToDatabase(displayedItemsType, listView1);
-
-            foreach (ListViewItem listViewItem in listViewItems)
-            {
-                listView1.Items.Add(listViewItem);
-            }
-
-            displayedItemsType = "Topic";
             
+            
+      
+            
+
+            //List<ListViewItem> listViewItems = _test1.returnItemsListAccordingToSpecificType(displayedItemsType, id, pageNumber);
+
+            //_test1.AddColumsToListViewAccordingToDataModel(displayedItemsType, listView1);
+
+            //foreach (ListViewItem listViewItem in listViewItems)
+            //{
+            //    listView1.Items.Add(listViewItem);
+            //}
+
+            //displayedItemsType = "Topic";
+
         }
     }
 }

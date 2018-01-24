@@ -13,23 +13,18 @@ namespace StackDocsFlow.TestService.Impl
     {
         private readonly IDocTagsService _docTagsService;
         private readonly ITopicsService _topicsService;
+        private readonly IExampleService _exampleService;
 
-        public Test1(IDocTagsService docTagsService, ITopicsService topicsService)
+        public Test1(IDocTagsService docTagsService, ITopicsService topicsService, IExampleService exampleService)
         {
             _docTagsService = docTagsService;
             _topicsService = topicsService;
+            _exampleService = exampleService;
         }
 
-        public void AddColumsToListViewAccordingToDatabase(string databaseName, ListView listView1)
+        public void AddColumsToListViewAccordingToDataModel(string databaseName, ListView listView1)
         {
-            if (databaseName.Equals("Topic"))
-            {
-                databaseName = "Examples";
-            } else if (databaseName.Equals("DocTags"))
-            {
-                databaseName = "Topic";
-            } 
-
+            
             switch(databaseName)
             {
                 case "DocTags":
@@ -37,15 +32,6 @@ namespace StackDocsFlow.TestService.Impl
                     listView1.Columns.Add("Id", 50, HorizontalAlignment.Left);
                     listView1.Columns.Add("Title", 100, HorizontalAlignment.Left);
                     listView1.Columns.Add("CreationDate", 200, HorizontalAlignment.Left);
-                    break;
-
-                case "DocTagsVersions":
-                    listView1.Columns.Clear();
-                    listView1.Columns.Add("Id", 50, HorizontalAlignment.Left);
-                    listView1.Columns.Add("DocTagId", 70, HorizontalAlignment.Left);
-                    listView1.Columns.Add("Title", 100, HorizontalAlignment.Left);
-                    listView1.Columns.Add("CreationDate", 200, HorizontalAlignment.Left);
-                    listView1.Columns.Add("LastEditDate", 200, HorizontalAlignment.Left);
                     break;
 
                 case "Examples":
@@ -70,32 +56,46 @@ namespace StackDocsFlow.TestService.Impl
             } 
         }
 
-        public List<ListViewItem> returnItemsListAccordingToSpecificType(string displayedItemsType, string id, int page)
+        public List<ListViewItem> returnItemsListAccordingToSpecificType(string displayedItemsType, string id, int pageNumber)
         {
             List<ListViewItem> itemsList = new List<ListViewItem>();
         
             switch(displayedItemsType)
             {
                 case "DocTags":
-                    List<Topic> topicList = _docTagsService.GetTopics(id, page);
+                    List<DocTags> docTagsList = _docTagsService.GetOnePageList(pageNumber);
+
+                    foreach (DocTags listItem in docTagsList)
+                    {
+                        string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
+                        ListViewItem listViewItem = new ListViewItem(item);
+                        listViewItem.Tag = listItem;
+                        itemsList.Add(listViewItem);
+                    }
+                    break;
+
+                case "Topic":
+                    List<Topic> topicList = _topicsService.GetOnePageOfTopicsByDocTagsId(id, pageNumber);
 
                     foreach (Topic listItem in topicList)
                     {
                         string[] item = { Convert.ToString(listItem.Id), Convert.ToString(listItem.DocTagId),
                         listItem.Title, listItem.Answer, Convert.ToString(listItem.CreationDate), Convert.ToString(listItem.LastEditDate) };
                         ListViewItem listViewItem = new ListViewItem(item);
+                        listViewItem.Tag = listItem;
                         itemsList.Add(listViewItem);
                     }
                     break;
 
-                case "Topic":
-                    List<Examples> examplesList = _topicsService.GetExamplesById(id, page);
+                case "Examples":
+                    List<Examples> examplesList = _exampleService.GetExamplesByIdByTopicId(id, pageNumber);
 
                     foreach (Examples listItem in examplesList)
                     {
                         string[] item = { Convert.ToString(listItem.Id), Convert.ToString(listItem.docTopicId),
                         listItem.Title, listItem.Description, Convert.ToString(listItem.CeationDate), Convert.ToString(listItem.LastEditDate) };
                         ListViewItem listViewItem = new ListViewItem(item);
+                        listViewItem.Tag = listItem;
                         itemsList.Add(listViewItem);
                     }
                     break;

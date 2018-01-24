@@ -10,35 +10,19 @@ namespace StackDocsFlow.Services.Impl
     class ExampleServiceImpl : IExampleService
     {
 
-    IDatabaseService databaseService = new DatabaseService();
+        IDatabaseService databaseService = new DatabaseService();
 
-    public List<Examples> GetExampleByTopicId(long topicExampleId)
+        public List<Examples> GetExamplesByIdByTopicId(string id, int pageNumber)
         {
-            throw new NotImplementedException();
+            pageNumber--;
+            int off = pageNumber > 0 ? (20 * pageNumber) : 0;
+            List<Examples> list = databaseService.GetExamplesData("SELECT * FROM examples where docTopicId = " + id + " limit 20 offset " + off);
+            return list;
         }
 
-        public List<Examples> GetExampleList()
+        public int GetPageCount()
         {
-      List<Examples> list = databaseService.GetExamplesData("select * from examples");
-      return list;
+            return databaseService.GetDataCount("examples");
         }
-
-    public List<Examples> GetOnePageList(string language, int page)
-    {
-      throw new NotImplementedException();
     }
-
-    public List<Examples> GetOnePageList(int page)
-    {
-      page--;
-      int off = page > 0 ? (20 * page) : 0;
-      List<Examples> list = databaseService.GetExamplesData("SELECT * FROM examples limit 20 offset " + off);
-      return list;
-    }
-
-    public int GetPageCount()
-    {
-      return databaseService.GetDataCount("examples");
-    }
-  }
 }

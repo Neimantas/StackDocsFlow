@@ -13,6 +13,21 @@ namespace StackDocsFlow.Services.Impl
     {
         IDatabaseService databaseService = new DatabaseService();
 
+        public List<DocTags> GetOnePageList(int pageNumber)
+        {
+            pageNumber--;
+            int off = pageNumber > 0 ? (20 * pageNumber) : 0;
+            List<DocTags> list = databaseService.GetDocTagsData("SELECT * FROM docTags limit 20 offset " + off);
+            return list;
+        }
+
+        //"SELECT * FROM docTags where title like '%" + language + "%' limit 20 offset " + off
+
+
+
+
+
+
         public List<DocTags> GetDocTags()
         {
             List<DocTags> list = databaseService.GetDocTagsData("select * from docTags");
@@ -30,33 +45,12 @@ namespace StackDocsFlow.Services.Impl
             throw new NotImplementedException();
         }
 
-        public List<DocTags> GetOnePageList(string language, int page)
-        {
-            page--;
-            int off = page > 0 ? (20 * page) : 0;
-            List<DocTags> list = databaseService.GetDocTagsData("SELECT * FROM docTags where title like '%" + language + "%' limit 20 offset " + off);
-            return list;
-        }
-
-        public List<DocTags> GetOnePageList(int page)
-        {
-            page--;
-            int off = page > 0 ? (20 * page) : 0;
-            List<DocTags> list = databaseService.GetDocTagsData("SELECT * FROM docTags limit 20 offset " + off);
-            return list;
-        }
+        
 
         public int GetPageCount()
         {
             return databaseService.GetDataCount("docTags");
         }
 
-        public List<Topic> GetTopics(string id, int page)
-        {
-            page--;
-            int off = page > 0 ? (20 * page) : 0;
-            List<Topic> list = databaseService.GetTopicsData("SELECT * FROM testJson where docTagId = " + id + " limit 20 offset " + off);
-            return list;
-        }
     }
 }

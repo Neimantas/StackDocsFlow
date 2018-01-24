@@ -4,19 +4,20 @@ using System.Collections.Generic;
 
 namespace StackDocsFlow.Services
 {
-  public interface IDocTagsService
-  {
-    List<DocTags> GetDocTags();
+    public interface IDocTagsService
+    {
+        List<DocTags> GetOnePageList(int pageNumber);
 
-    DocTags GetDocTagsById(long id);
+        List<DocTags> GetDocTags();
 
-    List<DocTags> GetOnePageList(string language, int page);
+        DocTags GetDocTagsById(long id);
 
-    List<DocTags> GetOnePageList(int page);
+        int GetPageCount();
 
-    int GetPageCount();
+        //List<Topic> GetOnePageTopicsById(string id, int page);
 
-    List<Topic> GetTopics(string id, int page);
-    List<DocTags> GetDocTagsByLanguage(Languages languages, List<DocTags> docTags);
-  }
+        List<DocTags> GetDocTagsByLanguage(Languages languages, List<DocTags> docTags);
+
+        
+    }
 }

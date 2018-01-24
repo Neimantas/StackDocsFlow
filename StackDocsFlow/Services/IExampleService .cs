@@ -7,15 +7,10 @@ using System.Threading.Tasks;
 namespace StackDocsFlow.Services
 {
     public interface IExampleService
-  {
-    List<Examples> GetExampleList();
+    {
+        List<Examples> GetExamplesByIdByTopicId(string id, int pageNumber);
+        int GetPageCount();
+    }
 
-    List<Examples> GetExampleByTopicId(long topicExampleId);
 
-    List<Examples> GetOnePageList(string language, int page);
-
-    List<Examples> GetOnePageList(int page);
-
-    int GetPageCount();
-  }
 }

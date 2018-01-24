@@ -9,18 +9,26 @@ namespace StackDocsFlow.Services.Impl
     {
         private IDatabaseService databaseService = new DatabaseService();
 
+        public List<Topic> GetOnePageOfTopicsByDocTagsId(string id, int pageNumber)
+        {
+            pageNumber--;
+            int off = pageNumber > 0 ? (20 * pageNumber) : 0;
+            List<Topic> list = databaseService.GetTopicsData("SELECT * FROM testJson where docTagId = " + id + " limit 20 offset " + off);
+            return list;
+        }
+
+
+
+
+
+
+
         public List<Topic> findTopicByLanguage(Languages languages, string keyword)
         {
             throw new NotImplementedException();
         }
 
-        public List<Examples> GetExamplesById(string id, int page)
-        {
-            page--;
-            int off = page > 0 ? (20 * page) : 0;
-            List<Examples> list = databaseService.GetExamplesData("SELECT * FROM examples where docTopicId = " + id + " limit 20 offset " + off);
-            return list;
-        }
+        
 
         public List<Topic> GetOnePageList(int page)
         {
@@ -51,8 +59,6 @@ namespace StackDocsFlow.Services.Impl
             List<Topic> list = databaseService.GetTopicsData("select * from testJson");
             return list;
         }
-
-
 
     }
 }
