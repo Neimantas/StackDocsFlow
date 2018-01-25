@@ -14,18 +14,20 @@ namespace StackDocsFlow.TestService.Impl
         private readonly IDocTagsService _docTagsService;
         private readonly ITopicsService _topicsService;
         private readonly IExampleService _exampleService;
+        private readonly IDatabaseService _databaseService;
 
-        public Test1(IDocTagsService docTagsService, ITopicsService topicsService, IExampleService exampleService)
+        public Test1(IDocTagsService docTagsService, ITopicsService topicsService, IExampleService exampleService, IDatabaseService databaseService)
         {
             _docTagsService = docTagsService;
             _topicsService = topicsService;
             _exampleService = exampleService;
+            _databaseService = databaseService;
         }
 
-        public void AddColumsToListViewAccordingToDataModel(string databaseName, ListView listView1)
+        public void AddColumsToListViewAccordingToDataModel(string modelName, ListView listView1)
         {
             
-            switch(databaseName)
+            switch(modelName)
             {
                 case "DocTags":
                     listView1.Columns.Clear();
@@ -75,7 +77,7 @@ namespace StackDocsFlow.TestService.Impl
                     break;
 
                 case "Topic":
-                    List<Topic> topicList = _topicsService.GetOnePageOfTopicsByDocTagsId(id, pageNumber);
+                    List<Topic> topicList = _topicsService.GetOnePageByDocTagsId(id, pageNumber);
 
                     foreach (Topic listItem in topicList)
                     {
@@ -88,7 +90,7 @@ namespace StackDocsFlow.TestService.Impl
                     break;
 
                 case "Examples":
-                    List<Examples> examplesList = _exampleService.GetExamplesByIdByTopicId(id, pageNumber);
+                    List<Examples> examplesList = _exampleService.GetOnePageByTopicId(id, pageNumber);
 
                     foreach (Examples listItem in examplesList)
                     {
@@ -101,6 +103,52 @@ namespace StackDocsFlow.TestService.Impl
                     break;
             }
             return itemsList;
+        }
+
+        public int GetPageCount(ListView listView1)
+        {
+
+            string itemsDataTypeInCurrentListView = returnListViewItemType(listView1);
+            int pageCount = 0;
+
+            switch (itemsDataTypeInCurrentListView)
+            {
+                case "DocTags":
+                    pageCount = _databaseService.GetDataCount("DocTags");
+                    break;
+                case "Topic":
+                    pageCount = _databaseService.GetDataCount("Topic");
+                    break;
+                case "Examples":
+                    pageCount = _databaseService.GetDataCount("Examples");
+                    break;
+            }
+            return pageCount;
+        }
+
+        public string returnListViewItemType(ListView listView1)
+        {
+            ListViewItem item = listView1.Items[0];
+            var objectTag = item.Tag;
+            Type type = objectTag.GetType();
+            return type.Name;
+        }
+
+
+        public int GetListViewItemId(string typeOfItem, ListView listView1)
+        {
+            ListViewItem item = listView1.Items[0];
+            switch (typeOfItem)
+            {
+                case "DocTags":
+                    //DocTags docTags = item.SubItems;
+                    break;
+                case "Topic":
+                    break;
+                case "Examples":
+                    break;
+            }
+            return 0;
         }
     }
 }

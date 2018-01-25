@@ -53,40 +53,57 @@ namespace StackDocsFlow
             searchTextBox.Clear();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void listView1_ItemActivate(Object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-        private void searchButton_Click(object sender, EventArgs e)
-        {
+            string clickedItemId = listView1.SelectedItems[0].Text;
+            string clickedItemType = _test1.returnListViewItemType(listView1);
             listView1.Items.Clear();
-            List<DocTags> filteredListByLanguage = FilteredListByLanguage(listLoadedInListView);
 
-            foreach (DocTags listItem in filteredListByLanguage)
+            switch (clickedItemType)
             {
-                string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
-                ListViewItem listViewItem = new ListViewItem(item);
-                listView1.Items.Add(listViewItem);
+                case "DocTags":
+                    List<ListViewItem> items1 = _test1.returnItemsListAccordingToSpecificType("Topic", clickedItemId, 1);
+                    _test1.AddColumsToListViewAccordingToDataModel("Topic", listView1);
+
+                    foreach (ListViewItem item in items1)
+                    {
+                        listView1.Items.Add(item);
+                    }
+
+                    languageComboBox.SelectedIndex = -1;
+                    searchTextBox.Clear();
+                    pageNumber = 1;
+                    break;
+
+                case "Topic":
+                    List<ListViewItem> items2 = _test1.returnItemsListAccordingToSpecificType("Examples", clickedItemId, 1);
+                    _test1.AddColumsToListViewAccordingToDataModel("Examples", listView1);
+
+                    foreach (ListViewItem item in items2)
+                    {
+                        listView1.Items.Add(item);
+                    }
+
+                    languageComboBox.SelectedIndex = -1;
+                    searchTextBox.Clear();
+                    pageNumber = 1;
+                    break;
             }
         }
 
-        public List<DocTags> FilteredListByLanguage(List<DocTags> unfilteredList)
-        {
-            List<DocTags> filteredListByLanguage = new List<DocTags>();
-            string languageFilter = languageComboBox.Text;
-            foreach (DocTags listItem in listLoadedInListView)
-            {
-                if (listItem.Title.Equals(languageFilter))
-                {
-                    filteredListByLanguage.Add(listItem);
-                }
-            }
-            return filteredListByLanguage;
-        }
         private void ForwardButton_Click(object sender, EventArgs e)
         {
-            int pageCount = _docTagsService.GetPageCount() / 20 + 1;
+            int pageCount = _test1.GetPageCount(listView1) / 20 + 1;
+
+            if (pageNumber < pageCount)
+            {
+                pageNumber++;
+                string listViewItemType = _test1.returnListViewItemType(listView1);
+                int idOfParentModel = _test1.GetListViewItemId(listViewItemType, listView1);
+                
+
+            }
+
 
             if (pageNumber < pageCount)
             {
@@ -151,6 +168,33 @@ namespace StackDocsFlow
             }
         }
 
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            List<DocTags> filteredListByLanguage = FilteredListByLanguage(listLoadedInListView);
+
+            foreach (DocTags listItem in filteredListByLanguage)
+            {
+                string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
+                ListViewItem listViewItem = new ListViewItem(item);
+                listView1.Items.Add(listViewItem);
+            }
+        }
+
+        public List<DocTags> FilteredListByLanguage(List<DocTags> unfilteredList)
+        {
+            List<DocTags> filteredListByLanguage = new List<DocTags>();
+            string languageFilter = languageComboBox.Text;
+            foreach (DocTags listItem in listLoadedInListView)
+            {
+                if (listItem.Title.Equals(languageFilter))
+                {
+                    filteredListByLanguage.Add(listItem);
+                }
+            }
+            return filteredListByLanguage;
+        }
+
         private void databaseComboBox_TextChanged(object sender, EventArgs e)
         {
             string databaseName = databaseComboBox.Text;
@@ -158,32 +202,25 @@ namespace StackDocsFlow
             _test1.AddColumsToListViewAccordingToDataModel(databaseName, listView1);
         }
 
-        private void listView1_ItemActivate(Object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string id = listView1.SelectedItems[0].Text;
-            ListViewItem item = listView1.SelectedItems[0];
-            var a = item.Tag;
-            Type b = a.GetType();
-            var c = b.Name;
-            
-
-            listView1.Items.Clear();
-            
-            
-      
-            
-
-            //List<ListViewItem> listViewItems = _test1.returnItemsListAccordingToSpecificType(displayedItemsType, id, pageNumber);
-
-            //_test1.AddColumsToListViewAccordingToDataModel(displayedItemsType, listView1);
-
-            //foreach (ListViewItem listViewItem in listViewItems)
-            //{
-            //    listView1.Items.Add(listViewItem);
-            //}
-
-            //displayedItemsType = "Topic";
-
+            Application.Exit();
         }
+
+
+
+
+        //List<ListViewItem> listViewItems = _test1.returnItemsListAccordingToSpecificType(displayedItemsType, id, pageNumber);
+
+        //_test1.AddColumsToListViewAccordingToDataModel(displayedItemsType, listView1);
+
+        //foreach (ListViewItem listViewItem in listViewItems)
+        //{
+        //    listView1.Items.Add(listViewItem);
+        //}
+
+        //displayedItemsType = "Topic";
+
+
     }
 }

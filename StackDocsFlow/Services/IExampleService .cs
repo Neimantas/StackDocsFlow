@@ -8,7 +8,7 @@ namespace StackDocsFlow.Services
 {
     public interface IExampleService
     {
-        List<Examples> GetExamplesByIdByTopicId(string id, int pageNumber);
+        List<Examples> GetOnePageByTopicId(string id, int pageNumber);
         int GetPageCount();
     }
 

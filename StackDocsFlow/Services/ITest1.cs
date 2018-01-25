@@ -11,6 +11,9 @@ namespace StackDocsFlow.TestService
     public interface ITest1
     {
         void AddColumsToListViewAccordingToDataModel(string database, ListView listView);
-        List<ListViewItem> returnItemsListAccordingToSpecificType(string displayedItemsType, string id, int page);
+        List<ListViewItem> returnItemsListAccordingToSpecificType(string displayedItemsType, string id, int pageNumber);
+        string returnListViewItemType(ListView listView1);
+        int GetPageCount(ListView listView1);
+        int GetListViewItemId(string typeOfItem, ListView listView1);
     }
 }

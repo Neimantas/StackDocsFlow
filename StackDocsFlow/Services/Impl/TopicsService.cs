@@ -1,5 +1,4 @@
 using StackDocsFlow.Models.DatabaseModels;
-using StackDocsFlow.Models.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +8,7 @@ namespace StackDocsFlow.Services.Impl
     {
         private IDatabaseService databaseService = new DatabaseService();
 
-        public List<Topic> GetOnePageOfTopicsByDocTagsId(string id, int pageNumber)
+        public List<Topic> GetOnePageByDocTagsId(string id, int pageNumber)
         {
             pageNumber--;
             int off = pageNumber > 0 ? (20 * pageNumber) : 0;
@@ -23,10 +22,7 @@ namespace StackDocsFlow.Services.Impl
 
 
 
-        public List<Topic> findTopicByLanguage(Languages languages, string keyword)
-        {
-            throw new NotImplementedException();
-        }
+
 
         
 

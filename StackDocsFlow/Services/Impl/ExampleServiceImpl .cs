@@ -12,7 +12,7 @@ namespace StackDocsFlow.Services.Impl
 
         IDatabaseService databaseService = new DatabaseService();
 
-        public List<Examples> GetExamplesByIdByTopicId(string id, int pageNumber)
+        public List<Examples> GetOnePageByTopicId(string id, int pageNumber)
         {
             pageNumber--;
             int off = pageNumber > 0 ? (20 * pageNumber) : 0;

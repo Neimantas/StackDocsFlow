@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StackDocsFlow.Models.DatabaseModels;
-using StackDocsFlow.Models.Enums;
-
 namespace StackDocsFlow.Services.Impl
 {
     public class DocTagsServiceImpl : IDocTagsService
@@ -40,10 +38,6 @@ namespace StackDocsFlow.Services.Impl
             return list[0];
         }
 
-        public List<DocTags> GetDocTagsByLanguage(Languages languages, List<DocTags> docTags)
-        {
-            throw new NotImplementedException();
-        }
 
         
 

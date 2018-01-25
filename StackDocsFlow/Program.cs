@@ -36,6 +36,7 @@ namespace StackDocsFlow
       container.Register<ITopicsService, TopicsService>(Lifestyle.Transient);
       container.Register<IExampleService, ExampleServiceImpl>(Lifestyle.Transient);
       container.Register<ITest1, Test1>(Lifestyle.Transient);
+      container.Register<IDatabaseService, DatabaseService>(Lifestyle.Transient);
       container.Register<Form1>();
       //container.Verify();
     }

@@ -1,5 +1,4 @@
 using StackDocsFlow.Models.DatabaseModels;
-using StackDocsFlow.Models.Enums;
 using System.Collections.Generic;
 
 namespace StackDocsFlow.Services
@@ -16,7 +15,6 @@ namespace StackDocsFlow.Services
 
         //List<Topic> GetOnePageTopicsById(string id, int page);
 
-        List<DocTags> GetDocTagsByLanguage(Languages languages, List<DocTags> docTags);
 
         
     }
