@@ -37,14 +37,5 @@ namespace StackDocsFlow.Services.Impl
             List<DocTags> list = databaseService.GetDocTagsData("select * from docTags where id =" + id);
             return list[0];
         }
-
-
-        
-
-        public int GetPageCount()
-        {
-            return databaseService.GetDataCount("docTags");
-        }
-
     }
 }

@@ -14,6 +14,7 @@ namespace StackDocsFlow.TestService
         List<ListViewItem> returnItemsListAccordingToSpecificType(string displayedItemsType, string id, int pageNumber);
         string returnListViewItemType(ListView listView1);
         int GetPageCount(ListView listView1);
-        int GetListViewItemId(string typeOfItem, ListView listView1);
+        string GetListViewItemId(string typeOfItem, ListView listView1);
+        string GetItemForeignIdName(ListView listView1, string tableType);
     }
 }

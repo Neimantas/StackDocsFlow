@@ -9,7 +9,6 @@ namespace StackDocsFlow.Services
     public interface IExampleService
     {
         List<Examples> GetOnePageByTopicId(string id, int pageNumber);
-        int GetPageCount();
     }
 
 

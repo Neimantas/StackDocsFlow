@@ -57,7 +57,6 @@ namespace StackDocsFlow
         {
             string clickedItemId = listView1.SelectedItems[0].Text;
             string clickedItemType = _test1.returnListViewItemType(listView1);
-            listView1.Items.Clear();
 
             switch (clickedItemType)
             {
@@ -99,71 +98,32 @@ namespace StackDocsFlow
             {
                 pageNumber++;
                 string listViewItemType = _test1.returnListViewItemType(listView1);
-                int idOfParentModel = _test1.GetListViewItemId(listViewItemType, listView1);
-                
-
-            }
-
-
-            if (pageNumber < pageCount)
-            {
-                pageNumber++;
-                string languageFilter = languageComboBox.Text;
-
-                if (languageFilter.Equals(""))
-                {
-                    listLoadedInListView = _docTagsService.GetOnePageList(pageNumber);
-                }
-                else
-                {
-                    //listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
-                }
-
+                string idOfParentModel = _test1.GetListViewItemId(listViewItemType, listView1);
+                List<ListViewItem> itemList = _test1.returnItemsListAccordingToSpecificType(listViewItemType, idOfParentModel, pageNumber);
                 listView1.Items.Clear();
 
-                foreach (DocTags listItem in listLoadedInListView)
+                foreach (ListViewItem item in itemList)
                 {
-                    string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
-                    ListViewItem listViewItem = new ListViewItem(item);
-                    listView1.Items.Add(listViewItem);
+                    listView1.Items.Add(item);
                 }
             }
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            int pageCount = _test1.GetPageCount(listView1) / 20 + 1;
+
             if (pageNumber > 1)
             {
                 pageNumber--;
-                string languageFilter = languageComboBox.Text;
-
-                //gaunam id, kurio ieskom
-                //kreipiames i db ir gaunam 1 atsakyma
-                //ta viena verciam musu objektu
-                //var vidinis = new AsVidinisObjektas();
-                //vidinis.Id 
-                //vidinas.Doctagas
-                //kraunam nauja forma 
-                //persiumca arba visa musu objekta, arba turima topicu id
-                //kraunam nauja forma pagal topiku 
-                //jeigu klikina i atsakyma, padarom ta pati, tik su atsakymo objektais
-
-                if (languageFilter.Equals(""))
-                {
-                    listLoadedInListView = _docTagsService.GetOnePageList(pageNumber);
-                }
-                else
-                {
-                    //listLoadedInListView = _docTagsService.GetOnePageList(languageFilter, pageNumber);
-                }
-
+                string listViewItemType = _test1.returnListViewItemType(listView1);
+                string idOfParentModel = _test1.GetListViewItemId(listViewItemType, listView1);
+                List<ListViewItem> itemList = _test1.returnItemsListAccordingToSpecificType(listViewItemType, idOfParentModel, pageNumber);
                 listView1.Items.Clear();
 
-                foreach (DocTags listItem in listLoadedInListView)
+                foreach (ListViewItem item in itemList)
                 {
-                    string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
-                    ListViewItem listViewItem = new ListViewItem(item);
-                    listView1.Items.Add(listViewItem);
+                    listView1.Items.Add(item);
                 }
             }
         }
@@ -206,21 +166,6 @@ namespace StackDocsFlow
         {
             Application.Exit();
         }
-
-
-
-
-        //List<ListViewItem> listViewItems = _test1.returnItemsListAccordingToSpecificType(displayedItemsType, id, pageNumber);
-
-        //_test1.AddColumsToListViewAccordingToDataModel(displayedItemsType, listView1);
-
-        //foreach (ListViewItem listViewItem in listViewItems)
-        //{
-        //    listView1.Items.Add(listViewItem);
-        //}
-
-        //displayedItemsType = "Topic";
-
 
     }
 }

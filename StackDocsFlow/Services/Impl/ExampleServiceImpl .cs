@@ -20,9 +20,6 @@ namespace StackDocsFlow.Services.Impl
             return list;
         }
 
-        public int GetPageCount()
-        {
-            return databaseService.GetDataCount("examples");
-        }
+
     }
 }

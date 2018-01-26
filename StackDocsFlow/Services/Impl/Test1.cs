@@ -107,23 +107,47 @@ namespace StackDocsFlow.TestService.Impl
 
         public int GetPageCount(ListView listView1)
         {
-
             string itemsDataTypeInCurrentListView = returnListViewItemType(listView1);
             int pageCount = 0;
 
             switch (itemsDataTypeInCurrentListView)
             {
                 case "DocTags":
-                    pageCount = _databaseService.GetDataCount("DocTags");
+                    pageCount = _databaseService.GetDataCount("DocTags", "notUsed", "notUsed");
                     break;
                 case "Topic":
-                    pageCount = _databaseService.GetDataCount("Topic");
+                    string topicForeignId = GetItemForeignId(listView1, "Topic");
+                    string topicForeignIdName = GetItemForeignIdName(listView1, "Topic");
+                    pageCount = _databaseService.GetDataCount("testJson", topicForeignId, topicForeignIdName);
                     break;
                 case "Examples":
-                    pageCount = _databaseService.GetDataCount("Examples");
+                    string examplesForeignId = GetItemForeignId(listView1, "Examples");
+                    string examplesForeignIdName = GetItemForeignIdName(listView1, "Examples");
+                    pageCount = _databaseService.GetDataCount("Examples", examplesForeignId, examplesForeignIdName);
                     break;
             }
             return pageCount;
+        }
+
+        public string GetListViewItemId(string typeOfItem, ListView listView1)
+        {
+            string id = "";
+            switch (typeOfItem)
+            {
+                case "DocTags":
+                    //ListViewItem item = listView1.Items[0];
+                    //DocTags docTags = (DocTags)item.Tag;
+
+                    break;
+                case "Topic":
+                    ListViewItem topicItem = listView1.Items[0];
+                    Topic topic = (Topic)topicItem.Tag;
+                    id = Convert.ToString(topic.DocTagId);
+                    break;
+                case "Examples":
+                    break;
+            }
+            return id;
         }
 
         public string returnListViewItemType(ListView listView1)
@@ -134,21 +158,48 @@ namespace StackDocsFlow.TestService.Impl
             return type.Name;
         }
 
-
-        public int GetListViewItemId(string typeOfItem, ListView listView1)
+        public string GetItemForeignId(ListView listView1, string tableType)
         {
-            ListViewItem item = listView1.Items[0];
-            switch (typeOfItem)
+            string id = "";
+            switch (tableType)
             {
-                case "DocTags":
-                    //DocTags docTags = item.SubItems;
-                    break;
                 case "Topic":
+                    ListViewItem topicItem = listView1.Items[0];
+                    Topic topic = (Topic)topicItem.Tag;
+                    id = Convert.ToString(topic.DocTagId);
                     break;
+
                 case "Examples":
+                    ListViewItem examplesItem = listView1.Items[0];
+                    Examples examples = (Examples)examplesItem.Tag;
+                    id = Convert.ToString(examples.docTopicId);
                     break;
             }
-            return 0;
+        return id;
         }
+
+        public string GetItemForeignIdName(ListView listView1, string tableType)
+        {
+            string idName = "";
+            switch(tableType)
+            {
+                case "Topic":
+                    ListViewItem topicItem = listView1.Items[0];
+                    Topic topic = (Topic)topicItem.Tag;
+                    idName = nameof(topic.DocTagId);
+                    break;
+                case "Examples":
+                    ListViewItem examplesItem = listView1.Items[0];
+                    Examples examples = (Examples)examplesItem.Tag;
+                    idName = nameof(examples.docTopicId);
+                    break;
+            }
+            return idName;
+        }
+
+
+        
+
+        //private string GetList
     }
 }

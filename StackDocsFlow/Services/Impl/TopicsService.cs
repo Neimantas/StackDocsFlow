@@ -39,10 +39,6 @@ namespace StackDocsFlow.Services.Impl
             throw new NotImplementedException();
         }
 
-        public int GetPageCount()
-        {
-            return databaseService.GetDataCount("testJson");
-        }
 
         public Topic getTopicById(long id)
         {
