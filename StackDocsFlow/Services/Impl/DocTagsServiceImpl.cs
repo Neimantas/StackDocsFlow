@@ -11,11 +11,11 @@ namespace StackDocsFlow.Services.Impl
     {
         IDatabaseService databaseService = new DatabaseService();
 
-        public List<DocTags> GetOnePageList(int pageNumber)
+        public List<DocTags> GetOnePageList(int pageNumber, string language)
         {
             pageNumber--;
             int off = pageNumber > 0 ? (20 * pageNumber) : 0;
-            List<DocTags> list = databaseService.GetDocTagsData("SELECT * FROM docTags limit 20 offset " + off);
+            List<DocTags> list = databaseService.GetDocTagsData("SELECT * FROM docTags where title like '%" + language + "%' limit 20 offset " + off);
             return list;
         }
 

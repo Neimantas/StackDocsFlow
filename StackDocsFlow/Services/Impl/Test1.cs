@@ -58,14 +58,14 @@ namespace StackDocsFlow.TestService.Impl
             } 
         }
 
-        public List<ListViewItem> returnItemsListAccordingToSpecificType(string displayedItemsType, string id, int pageNumber)
+        public List<ListViewItem> returnItemsListAccordingToSpecificType(string displayedItemsType, string id, int pageNumber, string language)
         {
             List<ListViewItem> itemsList = new List<ListViewItem>();
         
             switch(displayedItemsType)
             {
                 case "DocTags":
-                    List<DocTags> docTagsList = _docTagsService.GetOnePageList(pageNumber);
+                    List<DocTags> docTagsList = _docTagsService.GetOnePageList(pageNumber, language);
 
                     foreach (DocTags listItem in docTagsList)
                     {
@@ -137,7 +137,6 @@ namespace StackDocsFlow.TestService.Impl
                 case "DocTags":
                     //ListViewItem item = listView1.Items[0];
                     //DocTags docTags = (DocTags)item.Tag;
-
                     break;
                 case "Topic":
                     ListViewItem topicItem = listView1.Items[0];
@@ -196,10 +195,5 @@ namespace StackDocsFlow.TestService.Impl
             }
             return idName;
         }
-
-
-        
-
-        //private string GetList
     }
 }

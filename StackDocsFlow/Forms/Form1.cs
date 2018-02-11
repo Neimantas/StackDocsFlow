@@ -40,9 +40,10 @@ namespace StackDocsFlow
 
         private void showDataButton_Click(object sender, EventArgs e)
         {
+            listView1.Clear();
             _test1.AddColumsToListViewAccordingToDataModel("DocTags", listView1);
 
-            List<ListViewItem> listViewItemList = _test1.returnItemsListAccordingToSpecificType("DocTags", "#notUsed", 1);
+            List<ListViewItem> listViewItemList = _test1.returnItemsListAccordingToSpecificType("DocTags", "#notUsed", 1, "");
 
             foreach (ListViewItem listViewItem in listViewItemList)
             {
@@ -50,18 +51,18 @@ namespace StackDocsFlow
             }
 
             languageComboBox.SelectedIndex = -1;
-            searchTextBox.Clear();
         }
 
         private void listView1_ItemActivate(Object sender, EventArgs e)
         {
             string clickedItemId = listView1.SelectedItems[0].Text;
             string clickedItemType = _test1.returnListViewItemType(listView1);
+            listView1.Items.Clear();
 
             switch (clickedItemType)
             {
                 case "DocTags":
-                    List<ListViewItem> items1 = _test1.returnItemsListAccordingToSpecificType("Topic", clickedItemId, 1);
+                    List<ListViewItem> items1 = _test1.returnItemsListAccordingToSpecificType("Topic", clickedItemId, 1, "");
                     _test1.AddColumsToListViewAccordingToDataModel("Topic", listView1);
 
                     foreach (ListViewItem item in items1)
@@ -70,12 +71,11 @@ namespace StackDocsFlow
                     }
 
                     languageComboBox.SelectedIndex = -1;
-                    searchTextBox.Clear();
                     pageNumber = 1;
                     break;
 
                 case "Topic":
-                    List<ListViewItem> items2 = _test1.returnItemsListAccordingToSpecificType("Examples", clickedItemId, 1);
+                    List<ListViewItem> items2 = _test1.returnItemsListAccordingToSpecificType("Examples", clickedItemId, 1, "");
                     _test1.AddColumsToListViewAccordingToDataModel("Examples", listView1);
 
                     foreach (ListViewItem item in items2)
@@ -84,7 +84,6 @@ namespace StackDocsFlow
                     }
 
                     languageComboBox.SelectedIndex = -1;
-                    searchTextBox.Clear();
                     pageNumber = 1;
                     break;
             }
@@ -99,7 +98,7 @@ namespace StackDocsFlow
                 pageNumber++;
                 string listViewItemType = _test1.returnListViewItemType(listView1);
                 string idOfParentModel = _test1.GetListViewItemId(listViewItemType, listView1);
-                List<ListViewItem> itemList = _test1.returnItemsListAccordingToSpecificType(listViewItemType, idOfParentModel, pageNumber);
+                List<ListViewItem> itemList = _test1.returnItemsListAccordingToSpecificType(listViewItemType, idOfParentModel, pageNumber, "");
                 listView1.Items.Clear();
 
                 foreach (ListViewItem item in itemList)
@@ -111,6 +110,7 @@ namespace StackDocsFlow
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            
             int pageCount = _test1.GetPageCount(listView1) / 20 + 1;
 
             if (pageNumber > 1)
@@ -118,7 +118,7 @@ namespace StackDocsFlow
                 pageNumber--;
                 string listViewItemType = _test1.returnListViewItemType(listView1);
                 string idOfParentModel = _test1.GetListViewItemId(listViewItemType, listView1);
-                List<ListViewItem> itemList = _test1.returnItemsListAccordingToSpecificType(listViewItemType, idOfParentModel, pageNumber);
+                List<ListViewItem> itemList = _test1.returnItemsListAccordingToSpecificType(listViewItemType, idOfParentModel, pageNumber, "");
                 listView1.Items.Clear();
 
                 foreach (ListViewItem item in itemList)
@@ -130,15 +130,19 @@ namespace StackDocsFlow
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
-            List<DocTags> filteredListByLanguage = FilteredListByLanguage(listLoadedInListView);
+            string language = languageComboBox.Text;
+            listView1.Clear();
+            _test1.AddColumsToListViewAccordingToDataModel("DocTags", listView1);
 
-            foreach (DocTags listItem in filteredListByLanguage)
+            List<ListViewItem> listViewItemList = _test1.returnItemsListAccordingToSpecificType("DocTags", "#notUsed", 1, language);
+
+            foreach (ListViewItem listViewItem in listViewItemList)
             {
-                string[] item = { Convert.ToString(listItem.Id), listItem.Title, Convert.ToString(listItem.CreationDate) };
-                ListViewItem listViewItem = new ListViewItem(item);
                 listView1.Items.Add(listViewItem);
             }
+
+            //languageComboBox.SelectedIndex = -1;
+            //searchTextBox.Clear();
         }
 
         public List<DocTags> FilteredListByLanguage(List<DocTags> unfilteredList)
@@ -153,13 +157,6 @@ namespace StackDocsFlow
                 }
             }
             return filteredListByLanguage;
-        }
-
-        private void databaseComboBox_TextChanged(object sender, EventArgs e)
-        {
-            string databaseName = databaseComboBox.Text;
-
-            _test1.AddColumsToListViewAccordingToDataModel(databaseName, listView1);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
