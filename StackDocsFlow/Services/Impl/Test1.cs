@@ -105,6 +105,11 @@ namespace StackDocsFlow.TestService.Impl
             return itemsList;
         }
 
+        public List<ListViewItem> returnItemsListAccordingToSpecificType2(Object objectArgument, int pageNumber, string language)
+        {
+            throw new NotImplementedException();
+        }
+
         public int GetPageCount(ListView listView1)
         {
             string itemsDataTypeInCurrentListView = returnListViewItemType(listView1);
@@ -195,5 +200,7 @@ namespace StackDocsFlow.TestService.Impl
             }
             return idName;
         }
+
+        
     }
 }

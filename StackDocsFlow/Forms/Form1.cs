@@ -51,10 +51,14 @@ namespace StackDocsFlow
             }
 
             languageComboBox.SelectedIndex = -1;
-        }
+        } 
 
         private void listView1_ItemActivate(Object sender, EventArgs e)
         {
+            var listViewItemObjectClicked = listView1.SelectedItems[0];
+            List<ListViewItem> items1 = _test1.returnItemsListAccordingToSpecificType2(listViewItemObjectClicked, 1, "");
+
+
             string clickedItemId = listView1.SelectedItems[0].Text;
             string clickedItemType = _test1.returnListViewItemType(listView1);
             listView1.Items.Clear();
