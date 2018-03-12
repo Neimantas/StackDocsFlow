@@ -10,10 +10,11 @@ namespace StackDocsFlow.Services
 {
     public interface IDatabaseService
     {
-    List<DocTags> GetDocTagsData(string commandText);
-    List<DocTagsVersions> GetDocTagVersionsData(string commandText);
-    List<Examples> GetExamplesData(string commandText);
-    List<Topic> GetTopicsData(string commandText);
-    int GetDataCount(string tableName, string foreignId, string foreignIdName);
+        List<DocTags> GetDocTagsData(string commandText);
+        List<DocTagsVersions> GetDocTagVersionsData(string commandText);
+        List<Examples> GetExamplesData(string commandText);
+        List<Topic> GetTopicsData(string commandText);
+        int GetDataCount(string tableName, string foreignId, string foreignIdName);
+        List<Object> GetOnePageListOfObjects(Object objectArgument, int pageNumber, string clickedItemType, string clickedItemId);
     }
 }

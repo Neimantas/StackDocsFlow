@@ -154,5 +154,36 @@ namespace StackDocsFlow.Services.Impl
 
             return count;
         }
+
+
+        public List<Object> GetOnePageListOfObjects(Object objectArgument, int pageNumber, string clickedItemType, string clickedItemId)
+        {
+            pageNumber--;
+            int off = pageNumber > 0 ? (20 * pageNumber) : 0;
+            List<Object> list = GetDataFromDB("SELECT * FROM " + clickedItemType + " where title like '%" + language + "%' limit 20 offset " + off);
+            return null;
+        }
+
+        public List<DocTags> GetDataFromDB(string commandText)
+        {
+            List<DocTags> list = new List<DocTags>();
+            sql_con.Open();
+            var sql_cmd = sql_con.CreateCommand();
+            sql_cmd.CommandText = commandText;
+            sql_cmd.ExecuteNonQuery();
+
+            SQLiteDataReader reader = sql_cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                DocTags docTag = new DocTags();
+                docTag.Id = reader.GetInt64(0);
+                docTag.Title = reader.GetString(1);
+                docTag.CreationDate = GetDateFromDouble(reader.GetDouble(2));
+                list.Add(docTag);
+            }
+            sql_con.Close();
+            return list;
+        }
     }
 }

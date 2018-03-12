@@ -105,9 +105,13 @@ namespace StackDocsFlow.TestService.Impl
             return itemsList;
         }
 
-        public List<ListViewItem> returnItemsListAccordingToSpecificType2(Object objectArgument, int pageNumber, string language)
+        public List<ListViewItem> returnItemsListAccordingToSpecificType2(Object objectArgument, ListView listView1, int pageNumber, string language)
         {
-            throw new NotImplementedException();
+            string clickedItemId = listView1.SelectedItems[0].Text;
+            string clickedItemType = returnListViewItemType(listView1);
+            List<ListViewItem> itemsList = new List<ListViewItem>();
+            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(objectArgument, pageNumber, clickedItemType, clickedItemId);
+            return null;
         }
 
         public int GetPageCount(ListView listView1)
@@ -200,7 +204,5 @@ namespace StackDocsFlow.TestService.Impl
             }
             return idName;
         }
-
-        
     }
 }

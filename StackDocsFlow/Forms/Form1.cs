@@ -53,47 +53,50 @@ namespace StackDocsFlow
             languageComboBox.SelectedIndex = -1;
         } 
 
+        //private void listView1_ItemActivate(Object sender, EventArgs e)
+        //{
+        //    string clickedItemId = listView1.SelectedItems[0].Text;
+        //    string clickedItemType = _test1.returnListViewItemType(listView1);
+        //    listView1.Items.Clear();
+
+        //    switch (clickedItemType)
+        //    {
+        //        case "DocTags":
+        //            List<ListViewItem> items1 = _test1.returnItemsListAccordingToSpecificType("Topic", clickedItemId, 1, "");
+        //            _test1.AddColumsToListViewAccordingToDataModel("Topic", listView1);
+
+        //            foreach (ListViewItem item in items1)
+        //            {
+        //                listView1.Items.Add(item);
+        //            }
+
+        //            languageComboBox.SelectedIndex = -1;
+        //            pageNumber = 1;
+        //            break;
+
+        //        case "Topic":
+        //            List<ListViewItem> items2 = _test1.returnItemsListAccordingToSpecificType("Examples", clickedItemId, 1, "");
+        //            _test1.AddColumsToListViewAccordingToDataModel("Examples", listView1);
+
+        //            foreach (ListViewItem item in items2)
+        //            {
+        //                listView1.Items.Add(item);
+        //            }
+
+        //            languageComboBox.SelectedIndex = -1;
+        //            pageNumber = 1;
+        //            break;
+        //    }
+        //}
+
         private void listView1_ItemActivate(Object sender, EventArgs e)
         {
             var listViewItemObjectClicked = listView1.SelectedItems[0];
-            List<ListViewItem> items1 = _test1.returnItemsListAccordingToSpecificType2(listViewItemObjectClicked, 1, "");
-
-
-            string clickedItemId = listView1.SelectedItems[0].Text;
-            string clickedItemType = _test1.returnListViewItemType(listView1);
             listView1.Items.Clear();
-
-            switch (clickedItemType)
-            {
-                case "DocTags":
-                    List<ListViewItem> items1 = _test1.returnItemsListAccordingToSpecificType("Topic", clickedItemId, 1, "");
-                    _test1.AddColumsToListViewAccordingToDataModel("Topic", listView1);
-
-                    foreach (ListViewItem item in items1)
-                    {
-                        listView1.Items.Add(item);
-                    }
-
-                    languageComboBox.SelectedIndex = -1;
-                    pageNumber = 1;
-                    break;
-
-                case "Topic":
-                    List<ListViewItem> items2 = _test1.returnItemsListAccordingToSpecificType("Examples", clickedItemId, 1, "");
-                    _test1.AddColumsToListViewAccordingToDataModel("Examples", listView1);
-
-                    foreach (ListViewItem item in items2)
-                    {
-                        listView1.Items.Add(item);
-                    }
-
-                    languageComboBox.SelectedIndex = -1;
-                    pageNumber = 1;
-                    break;
-            }
+            List<ListViewItem> items22 = _test1.returnItemsListAccordingToSpecificType2(listViewItemObjectClicked, listView1, 1, "");
         }
 
-        private void ForwardButton_Click(object sender, EventArgs e)
+            private void ForwardButton_Click(object sender, EventArgs e)
         {
             int pageCount = _test1.GetPageCount(listView1) / 20 + 1;
 
@@ -114,7 +117,6 @@ namespace StackDocsFlow
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            
             int pageCount = _test1.GetPageCount(listView1) / 20 + 1;
 
             if (pageNumber > 1)
