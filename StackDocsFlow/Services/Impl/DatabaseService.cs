@@ -13,7 +13,6 @@ namespace StackDocsFlow.Services.Impl
 
         SQLiteConnection sql_con = new SQLiteConnection("Data Source=ExternalSources/maindb.db;Version=3;New=False;Compress=True;");
 
-
         public List<DocTags> GetDocTagsData(string commandText)
         {
             List<DocTags> list = new List<DocTags>();
@@ -26,7 +25,6 @@ namespace StackDocsFlow.Services.Impl
 
             while (reader.Read())
             {
-
                 DocTags docTag = new DocTags();
                 docTag.Id = reader.GetInt64(0);
                 docTag.Title = reader.GetString(1);
@@ -156,11 +154,14 @@ namespace StackDocsFlow.Services.Impl
         }
 
 
+
         public List<Object> GetOnePageListOfObjects(Object objectArgument, int pageNumber, string clickedItemType, string clickedItemId)
         {
+            string tableName = typeof(Topic).Attributes.ToString();
+
             pageNumber--;
             int off = pageNumber > 0 ? (20 * pageNumber) : 0;
-            List<Object> list = GetDataFromDB("SELECT * FROM " + clickedItemType + " where title like '%" + language + "%' limit 20 offset " + off);
+            //List<Object> list = GetDataFromDB("SELECT * FROM " + clickedItemType + " where title like '%" + language + "%' limit 20 offset " + off);
             return null;
         }
 

@@ -4,9 +4,11 @@ using StackDocsFlow.TestService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -40,6 +42,25 @@ namespace StackDocsFlow
 
         private void showDataButton_Click(object sender, EventArgs e)
         {
+            Topic topic = new Topic();
+            string a = "abc";
+            var b = a.GetType();
+            Type type = Type.GetType("Topic");
+            var c = topic.GetType();
+
+
+            string TypeName = topic.GetType().FullName;
+            Type DateType = Type.GetType(TypeName);
+            var customAttributes = DateType.GetTypeInfo().GetCustomAttributes<TableAttribute>();
+
+            var tableName = typeof(Topic).Name;
+            
+            if (customAttributes.Count() > 0)
+            {
+                tableName = customAttributes.First().Name;
+            }
+
+
             listView1.Clear();
             _test1.AddColumsToListViewAccordingToDataModel("DocTags", listView1);
 
