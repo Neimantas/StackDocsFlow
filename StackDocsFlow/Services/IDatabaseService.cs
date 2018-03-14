@@ -15,6 +15,6 @@ namespace StackDocsFlow.Services
         List<Examples> GetExamplesData(string commandText);
         List<Topic> GetTopicsData(string commandText);
         int GetDataCount(string tableName, string foreignId, string foreignIdName);
-        List<Object> GetOnePageListOfObjects(Object objectArgument, int pageNumber, string clickedItemType, string clickedItemId);
+        List<Object> GetOnePageListOfObjects(Object objectArgument, int pageNumber, string clickedItemType, string clickedItemId, string language);
     }
 }

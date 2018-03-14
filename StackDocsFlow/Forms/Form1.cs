@@ -49,12 +49,12 @@ namespace StackDocsFlow
             var c = topic.GetType();
 
 
-            string TypeName = topic.GetType().FullName;
-            Type DateType = Type.GetType(TypeName);
-            var customAttributes = DateType.GetTypeInfo().GetCustomAttributes<TableAttribute>();
+            string typeName = topic.GetType().FullName;
+            Type dateType = Type.GetType(typeName);
+            var customAttributes = dateType.GetTypeInfo().GetCustomAttributes<TableAttribute>();
 
-            var tableName = typeof(Topic).Name;
-            
+            var tableName = "";  //typeof(Topic).Name;
+
             if (customAttributes.Count() > 0)
             {
                 tableName = customAttributes.First().Name;
@@ -112,12 +112,13 @@ namespace StackDocsFlow
 
         private void listView1_ItemActivate(Object sender, EventArgs e)
         {
-            var listViewItemObjectClicked = listView1.SelectedItems[0];
-            listView1.Items.Clear();
+            Type dateType = Type.GetType("Topic");
+            ListViewItem listViewItemObjectClicked = listView1.SelectedItems[0];
             List<ListViewItem> items22 = _test1.returnItemsListAccordingToSpecificType2(listViewItemObjectClicked, listView1, 1, "");
+            listView1.Items.Clear();
         }
 
-            private void ForwardButton_Click(object sender, EventArgs e)
+        private void ForwardButton_Click(object sender, EventArgs e)
         {
             int pageCount = _test1.GetPageCount(listView1) / 20 + 1;
 

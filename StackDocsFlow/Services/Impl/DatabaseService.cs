@@ -1,8 +1,10 @@
 using StackDocsFlow.Models.DatabaseModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SQLite;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -155,13 +157,18 @@ namespace StackDocsFlow.Services.Impl
 
 
 
-        public List<Object> GetOnePageListOfObjects(Object objectArgument, int pageNumber, string clickedItemType, string clickedItemId)
+        public List<Object> GetOnePageListOfObjects(Object objectArgument, int pageNumber, string clickedItemType, string clickedItemId, string language)
         {
-            string tableName = typeof(Topic).Attributes.ToString();
-
             pageNumber--;
+
+            Type dateType = Type.GetType(clickedItemType);
+            var customAttributes = dateType.GetTypeInfo().GetCustomAttributes<TableAttribute>();
+
+            string tableName = String.Empty;
+            tableName = customAttributes.First().Name;
+            
             int off = pageNumber > 0 ? (20 * pageNumber) : 0;
-            //List<Object> list = GetDataFromDB("SELECT * FROM " + clickedItemType + " where title like '%" + language + "%' limit 20 offset " + off);
+            var list = GetDataFromDB("SELECT * FROM " + tableName + " where title like '%" + language + "%' limit 20 offset " + off);
             return null;
         }
 

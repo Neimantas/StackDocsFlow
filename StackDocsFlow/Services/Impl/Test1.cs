@@ -110,7 +110,7 @@ namespace StackDocsFlow.TestService.Impl
             string clickedItemId = listView1.SelectedItems[0].Text;
             string clickedItemType = returnListViewItemType(listView1);
             List<ListViewItem> itemsList = new List<ListViewItem>();
-            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(objectArgument, pageNumber, clickedItemType, clickedItemId);
+            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(objectArgument, pageNumber, clickedItemType, clickedItemId, language);
             return null;
         }
 
