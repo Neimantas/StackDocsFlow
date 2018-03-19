@@ -157,15 +157,9 @@ namespace StackDocsFlow.Services.Impl
 
 
 
-        public List<Object> GetOnePageListOfObjects(Object objectArgument, int pageNumber, string clickedItemType, string clickedItemId, string language)
+        public List<Object> GetOnePageListOfObjects(string tableName, int pageNumber, string clickedItemId, string language)
         {
             pageNumber--;
-
-            Type dateType = Type.GetType(clickedItemType);
-            var customAttributes = dateType.GetTypeInfo().GetCustomAttributes<TableAttribute>();
-
-            string tableName = String.Empty;
-            tableName = customAttributes.First().Name;
             
             int off = pageNumber > 0 ? (20 * pageNumber) : 0;
             var list = GetDataFromDB("SELECT * FROM " + tableName + " where title like '%" + language + "%' limit 20 offset " + off);

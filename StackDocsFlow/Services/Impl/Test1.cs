@@ -2,7 +2,9 @@
 using StackDocsFlow.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -105,12 +107,12 @@ namespace StackDocsFlow.TestService.Impl
             return itemsList;
         }
 
-        public List<ListViewItem> returnItemsListAccordingToSpecificType2(Object objectArgument, ListView listView1, int pageNumber, string language)
+        public List<ListViewItem> returnItemsListAccordingToSpecificType2(ListView listView1, int pageNumber, string language)
         {
             string clickedItemId = listView1.SelectedItems[0].Text;
-            string clickedItemType = returnListViewItemType(listView1);
+            string tableName = GetTableNameAccordingModelClass(listView1);
             List<ListViewItem> itemsList = new List<ListViewItem>();
-            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(objectArgument, pageNumber, clickedItemType, clickedItemId, language);
+            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(tableName, pageNumber, clickedItemId, language);
             return null;
         }
 
@@ -203,6 +205,14 @@ namespace StackDocsFlow.TestService.Impl
                     break;
             }
             return idName;
+        }
+
+        private string GetTableNameAccordingModelClass(ListView listView1) 
+        {
+            Type selectedItemType = listView1.SelectedItems[0].GetType();
+            var customAttributes = selectedItemType.GetTypeInfo().GetCustomAttributes<TableAttribute>();
+            string tableName = customAttributes.First().Name;
+            return tableName;
         }
     }
 }

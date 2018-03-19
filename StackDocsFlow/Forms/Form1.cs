@@ -42,25 +42,6 @@ namespace StackDocsFlow
 
         private void showDataButton_Click(object sender, EventArgs e)
         {
-            Topic topic = new Topic();
-            string a = "abc";
-            var b = a.GetType();
-            Type type = Type.GetType("Topic");
-            var c = topic.GetType();
-
-
-            string typeName = topic.GetType().FullName;
-            Type dateType = Type.GetType(typeName);
-            var customAttributes = dateType.GetTypeInfo().GetCustomAttributes<TableAttribute>();
-
-            var tableName = "";  //typeof(Topic).Name;
-
-            if (customAttributes.Count() > 0)
-            {
-                tableName = customAttributes.First().Name;
-            }
-
-
             listView1.Clear();
             _test1.AddColumsToListViewAccordingToDataModel("DocTags", listView1);
 
@@ -114,7 +95,8 @@ namespace StackDocsFlow
         {
             Type dateType = Type.GetType("Topic");
             ListViewItem listViewItemObjectClicked = listView1.SelectedItems[0];
-            List<ListViewItem> items22 = _test1.returnItemsListAccordingToSpecificType2(listViewItemObjectClicked, listView1, 1, "");
+            List<ListViewItem> items22 = _test1.returnItemsListAccordingToSpecificType2(listView1, 1, "");
+            
             listView1.Items.Clear();
         }
 
