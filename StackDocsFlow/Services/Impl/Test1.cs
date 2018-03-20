@@ -2,6 +2,7 @@
 using StackDocsFlow.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
@@ -111,13 +112,23 @@ namespace StackDocsFlow.TestService.Impl
         {
             string clickedItemId = listView1.SelectedItems[0].Text;
             string tableName = GetTableNameAccordingModelClass(listView1);
+            string childTableName = TableNameOfClickedElementChildClass(listView1);
             List<ListViewItem> itemsList = new List<ListViewItem>();
-            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(tableName, pageNumber, clickedItemId, language);
+            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(tableName, childTableName, pageNumber, clickedItemId, language);
             return null;
+        }
+
+        private string TableNameOfClickedElementChildClass(ListView listView1)
+        {
+            DescriptionAttribute descriptionAttribute = (DescriptionAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].GetType(), typeof(DescriptionAttribute));
+            string tableName = descriptionAttribute.Description;
+            return tableName;
         }
 
         public int GetPageCount(ListView listView1)
         {
+
+
             string itemsDataTypeInCurrentListView = returnListViewItemType(listView1);
             int pageCount = 0;
 

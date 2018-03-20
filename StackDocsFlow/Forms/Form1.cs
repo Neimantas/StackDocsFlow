@@ -37,7 +37,7 @@ namespace StackDocsFlow
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            string a = ((DescriptionAttribute)Attribute.GetCustomAttribute(typeof(DocTags), typeof(DescriptionAttribute))).Description;
         }
 
         private void showDataButton_Click(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace StackDocsFlow
             }
 
             languageComboBox.SelectedIndex = -1;
-        } 
+        }
 
         //private void listView1_ItemActivate(Object sender, EventArgs e)
         //{
@@ -96,7 +96,7 @@ namespace StackDocsFlow
             Type dateType = Type.GetType("Topic");
             ListViewItem listViewItemObjectClicked = listView1.SelectedItems[0];
             List<ListViewItem> items22 = _test1.returnItemsListAccordingToSpecificType2(listView1, 1, "");
-            
+
             listView1.Items.Clear();
         }
 

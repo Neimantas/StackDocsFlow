@@ -134,7 +134,6 @@ namespace StackDocsFlow.Services.Impl
             int count = 0;
             sql_con.Open();
             var sql_cmd = sql_con.CreateCommand();
-
             
             if (tableName.Equals("DocTags"))
             {
@@ -157,18 +156,17 @@ namespace StackDocsFlow.Services.Impl
 
 
 
-        public List<Object> GetOnePageListOfObjects(string tableName, int pageNumber, string clickedItemId, string language)
+        public List<Object> GetOnePageListOfObjects(string tableName, string childTableName, int pageNumber, string clickedItemId, string language)
         {
             pageNumber--;
-            
             int off = pageNumber > 0 ? (20 * pageNumber) : 0;
-            var list = GetDataFromDB("SELECT * FROM " + tableName + " where title like '%" + language + "%' limit 20 offset " + off);
-            return null;
+            List<Object> objectsList = GetDataFromDB("SELECT * FROM " + tableName + " limit 20 offset " + off);
+            return objectsList;
         }
 
-        public List<DocTags> GetDataFromDB(string commandText)
+        public List<Object> GetDataFromDB(string commandText)
         {
-            List<DocTags> list = new List<DocTags>();
+            List<Object> list = new List<Object>();
             sql_con.Open();
             var sql_cmd = sql_con.CreateCommand();
             sql_cmd.CommandText = commandText;
