@@ -1,4 +1,5 @@
-﻿using StackDocsFlow.Models.DatabaseModels;
+﻿using StackDocsFlow.CustomAttributes;
+using StackDocsFlow.Models.DatabaseModels;
 using StackDocsFlow.Services;
 using System;
 using System.Collections.Generic;
@@ -113,9 +114,18 @@ namespace StackDocsFlow.TestService.Impl
             string clickedItemId = listView1.SelectedItems[0].Text;
             string tableName = GetTableNameAccordingModelClass(listView1);
             string childTableName = TableNameOfClickedElementChildClass(listView1);
+            string tableNameIdName = GetChildTableForeignIdName(listView1);
             List<ListViewItem> itemsList = new List<ListViewItem>();
             List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(tableName, childTableName, pageNumber, clickedItemId, language);
             return null;
+        }
+
+        private string GetChildTableForeignIdName(ListView listView1)
+        {
+            
+            ChildTableForeignIdNameAttribute parentTableIdNameAttribute = (ChildTableForeignIdNameAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].GetType(), typeof(ChildTableForeignIdNameAttribute));
+            string idName = parentTableIdNameAttribute.Name;
+            return idName;
         }
 
         private string TableNameOfClickedElementChildClass(ListView listView1)

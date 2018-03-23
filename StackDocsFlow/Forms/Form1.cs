@@ -37,7 +37,7 @@ namespace StackDocsFlow
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string a = ((DescriptionAttribute)Attribute.GetCustomAttribute(typeof(DocTags), typeof(DescriptionAttribute))).Description;
+            
         }
 
         private void showDataButton_Click(object sender, EventArgs e)

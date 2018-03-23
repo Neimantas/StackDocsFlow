@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StackDocsFlow.CustomAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,10 @@ namespace StackDocsFlow.Models.DatabaseModels
 {
     [Table("DocTags")]
     [Description("topic")]
+
+    [ChildClassType(Type = typeof(Topic))]
+    [ChildTableForeignIdName(Name = "DocTagId")]
+    [ChildTableName(Name = "testJson")]
     public class DocTags
     {
         public long Id { get; set; }

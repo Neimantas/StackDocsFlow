@@ -69,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomAttributes\ChildClassTypeAttribute.cs" />
+    <Compile Include="CustomAttributes\ChildTableNameAttribute.cs" />
+    <Compile Include="CustomAttributes\ChildTableForeignIdNameAttribute.cs" />
+    <Compile Include="CustomAttributes\ParentChildTableForeignIdNameAttribute.cs" />
+    <Compile Include="CustomAttributes\ParentClassTypeAttribute.cs" />
+    <Compile Include="CustomAttributes\ParentTableNameAttribute.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
