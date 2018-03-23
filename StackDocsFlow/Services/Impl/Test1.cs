@@ -79,7 +79,7 @@ namespace StackDocsFlow.TestService.Impl
                         itemsList.Add(listViewItem);
                     }
                     break;
-
+                    
                 case "Topic":
                     List<Topic> topicList = _topicsService.GetOnePageByDocTagsId(id, pageNumber);
 
@@ -113,25 +113,25 @@ namespace StackDocsFlow.TestService.Impl
         {
             string clickedItemId = listView1.SelectedItems[0].Text;
             string tableName = GetTableNameAccordingModelClass(listView1);
-            string childTableName = TableNameOfClickedElementChildClass(listView1);
-            string tableNameIdName = GetChildTableForeignIdName(listView1);
+            string childTableName = GetTableNameOfClickedElementChildClass(listView1);
+            string childClassForeignKey = GetChildTableForeignIdName(listView1);
             List<ListViewItem> itemsList = new List<ListViewItem>();
-            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(tableName, childTableName, pageNumber, clickedItemId, language);
+            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(childTableName, childClassForeignKey, pageNumber, clickedItemId, language);
             return null;
         }
 
         private string GetChildTableForeignIdName(ListView listView1)
         {
-            
-            ChildTableForeignIdNameAttribute parentTableIdNameAttribute = (ChildTableForeignIdNameAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].GetType(), typeof(ChildTableForeignIdNameAttribute));
+            ChildTableForeignIdNameAttribute parentTableIdNameAttribute = (ChildTableForeignIdNameAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].Tag.GetType(), typeof(ChildTableForeignIdNameAttribute));
             string idName = parentTableIdNameAttribute.Name;
             return idName;
         }
 
-        private string TableNameOfClickedElementChildClass(ListView listView1)
+        private string GetTableNameOfClickedElementChildClass(ListView listView1)
         {
-            DescriptionAttribute descriptionAttribute = (DescriptionAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].GetType(), typeof(DescriptionAttribute));
-            string tableName = descriptionAttribute.Description;
+            DocTags docTags = new DocTags();
+            ChildTableNameAttribute descriptionAttribute = (ChildTableNameAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].Tag.GetType(), typeof(ChildTableNameAttribute));
+            string tableName = descriptionAttribute.Name;
             return tableName;
         }
 
@@ -230,7 +230,7 @@ namespace StackDocsFlow.TestService.Impl
 
         private string GetTableNameAccordingModelClass(ListView listView1) 
         {
-            Type selectedItemType = listView1.SelectedItems[0].GetType();
+            Type selectedItemType = listView1.SelectedItems[0].Tag.GetType();
             var customAttributes = selectedItemType.GetTypeInfo().GetCustomAttributes<TableAttribute>();
             string tableName = customAttributes.First().Name;
             return tableName;

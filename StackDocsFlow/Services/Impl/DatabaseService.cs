@@ -156,11 +156,11 @@ namespace StackDocsFlow.Services.Impl
 
 
 
-        public List<Object> GetOnePageListOfObjects(string tableName, string childTableName, int pageNumber, string clickedItemId, string language)
+        public List<Object> GetOnePageListOfObjects(string childTableName, string childClassForeignKey, int pageNumber, string clickedItemId, string language)
         {
             pageNumber--;
             int off = pageNumber > 0 ? (20 * pageNumber) : 0;
-            List<Object> objectsList = GetDataFromDB("SELECT * FROM " + childTableName + "where tableNameId = clickedItemId limit 20 offset " + off);
+            List<Object> objectsList = GetDataFromDB("SELECT * FROM " + childTableName + " where " + childClassForeignKey + " = " + clickedItemId + " limit 20 offset " + off);
             return objectsList;
         }
 
