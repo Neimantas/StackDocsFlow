@@ -117,7 +117,8 @@ namespace StackDocsFlow.TestService.Impl
             string childClassForeignKey = GetChildTableForeignIdName(listView1);
             List<ListViewItem> itemsList = new List<ListViewItem>();
             List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(childTableName, childClassForeignKey, pageNumber, clickedItemId, language);
-            return null;
+            List<ListViewItem> list = GetListOfListViewItemsAccordingToGivenType(listViewItemObjectList, listView1);
+            return list;
         }
 
         private string GetChildTableForeignIdName(ListView listView1)
@@ -133,6 +134,13 @@ namespace StackDocsFlow.TestService.Impl
             ChildTableNameAttribute descriptionAttribute = (ChildTableNameAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].Tag.GetType(), typeof(ChildTableNameAttribute));
             string tableName = descriptionAttribute.Name;
             return tableName;
+        }
+
+        private List<ListViewItem> GetListOfListViewItemsAccordingToGivenType(List<Object> objectList, ListView listView1)
+        {
+            List<ListViewItem> list = new List<ListViewItem>();
+
+            return list;
         }
 
         public int GetPageCount(ListView listView1)

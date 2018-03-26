@@ -1,3 +1,4 @@
+using Dapper;
 using StackDocsFlow.Models.DatabaseModels;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace StackDocsFlow.Services.Impl
                 DocTags docTag = new DocTags();
                 docTag.Id = reader.GetInt64(0);
                 docTag.Title = reader.GetString(1);
-                docTag.CreationDate = GetDateFromDouble(reader.GetDouble(2));
+                docTag.CreationDate = reader.GetString(2);
                 list.Add(docTag);
             }
             sql_con.Close();
@@ -66,59 +67,59 @@ namespace StackDocsFlow.Services.Impl
         public List<Examples> GetExamplesData(string commandText)
         {
             List<Examples> list = new List<Examples>();
-            sql_con.Open();
-            var sql_cmd = sql_con.CreateCommand();
-            sql_cmd.CommandText = commandText;
-            sql_cmd.ExecuteNonQuery();
-            SQLiteDataReader reader = sql_cmd.ExecuteReader();
+            //sql_con.Open();
+            //var sql_cmd = sql_con.CreateCommand();
+            //sql_cmd.CommandText = commandText;
+            //sql_cmd.ExecuteNonQuery();
+            //SQLiteDataReader reader = sql_cmd.ExecuteReader();
 
-            while (reader.Read())
-            {
-                Examples example = new Examples();
-                example.Id = reader.GetInt64(0);
-                example.docTopicId = reader.GetInt64(1);
-                example.Title = reader.GetString(2);
-                example.Description = reader.GetString(3);
-                example.CeationDate = GetDateFromDouble(reader.GetDouble(4));
-                if (!reader.IsDBNull(5))
-                {
-                    example.LastEditDate = GetDateFromDouble(reader.GetDouble(5));
-                }
-                list.Add(example);
-            }
-            sql_con.Close();
+            //while (reader.Read())
+            //{
+            //    Examples example = new Examples();
+            //    example.Id = reader.GetInt64(0);
+            //    example.docTopicId = reader.GetInt64(1);
+            //    example.Title = reader.GetString(2);
+            //    example.Description = reader.GetString(3);
+            //    example.CeationDate = GetDateFromDouble(reader.GetDouble(4));
+            //    if (!reader.IsDBNull(5))
+            //    {
+            //        example.LastEditDate = GetDateFromDouble(reader.GetDouble(5));
+            //    }
+            //    list.Add(example);
+            //}
+            //sql_con.Close();
             return list;
         }
 
         public List<Topic> GetTopicsData(string commandText)
         {
             List<Topic> list = new List<Topic>();
-            sql_con.Open();
-            var sql_cmd = sql_con.CreateCommand();
-            sql_cmd.CommandText = commandText;
-            sql_cmd.ExecuteNonQuery();
-            SQLiteDataReader reader = sql_cmd.ExecuteReader();
+            //    sql_con.Open();
+            //    var sql_cmd = sql_con.CreateCommand();
+            //    sql_cmd.CommandText = commandText;
+            //    sql_cmd.ExecuteNonQuery();
+            //    SQLiteDataReader reader = sql_cmd.ExecuteReader();
 
-            while (reader.Read())
-            {
-                Topic topic = new Topic();
-                topic.Id = reader.GetInt32(0);
-                topic.DocTagId = reader.GetInt64(1);
-                topic.Title = reader.GetString(2);
-                topic.Answer = reader.GetString(3);
-                topic.CreationDate = GetDateFromDouble(reader.GetDouble(4));
-                if (!reader.IsDBNull(5))
-                {
-                    topic.LastEditDate = GetDateFromDouble(reader.GetDouble(5));
-                }
-                list.Add(topic);
-            }
+            //    while (reader.Read())
+            //    {
+            //        Topic topic = new Topic();
+            //        topic.Id = reader.GetInt32(0);
+            //        topic.DocTagId = reader.GetInt64(1);
+            //        topic.Title = reader.GetString(2);
+            //        topic.Answer = reader.GetString(3);
+            //        topic.CreationDate = GetDateFromDouble(reader.GetDouble(4));
+            //        if (!reader.IsDBNull(5))
+            //        {
+            //            topic.LastEditDate = GetDateFromDouble(reader.GetDouble(5));
+            //        }
+            //        list.Add(topic);
+            //    }
 
-            sql_con.Close();
+            //    sql_con.Close();
             return list;
         }
 
-        public DateTime GetDateFromDouble(double number)
+    public DateTime GetDateFromDouble(double number)
         {
             System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
             if (number == 0)
@@ -166,22 +167,10 @@ namespace StackDocsFlow.Services.Impl
 
         public List<Object> GetDataFromDB(string commandText)
         {
-            List<Object> list = new List<Object>();
             sql_con.Open();
-            var sql_cmd = sql_con.CreateCommand();
-            sql_cmd.CommandText = commandText;
-            sql_cmd.ExecuteNonQuery();
 
-            SQLiteDataReader reader = sql_cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                DocTags docTag = new DocTags();
-                docTag.Id = reader.GetInt64(0);
-                docTag.Title = reader.GetString(1);
-                docTag.CreationDate = GetDateFromDouble(reader.GetDouble(2));
-                list.Add(docTag);
-            }
+            var list = sql_con.Query(commandText).ToList();
+            
             sql_con.Close();
             return list;
         }

@@ -14,7 +14,7 @@ namespace StackDocsFlow.Models.DatabaseModels
         public long docTopicId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime CeationDate { get; set; }
-        public DateTime LastEditDate { get; set; }
+        public string CeationDate { get; set; }
+        public string LastEditDate { get; set; }
     }
 }
