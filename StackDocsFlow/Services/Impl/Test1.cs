@@ -115,9 +115,53 @@ namespace StackDocsFlow.TestService.Impl
             string tableName = GetTableNameAccordingModelClass(listView1);
             string childTableName = GetTableNameOfClickedElementChildClass(listView1);
             string childClassForeignKey = GetChildTableForeignIdName(listView1);
-            List<ListViewItem> itemsList = new List<ListViewItem>();
             List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(childTableName, childClassForeignKey, pageNumber, clickedItemId, language);
             List<ListViewItem> list = GetListOfListViewItemsAccordingToGivenType(listViewItemObjectList, listView1);
+            return list;
+        }
+
+        private List<ListViewItem> GetListOfListViewItemsAccordingToGivenType(List<Object> objectList, ListView listView1)
+        {
+
+
+
+            //List<Topic> topic = objectList.ConvertAll(x => new Topic(
+            //        Id = x,
+            //        DocTagId = x
+
+
+            //    ));
+
+
+
+
+
+            //var target = objectList.ConvertAll(x => (Topic)x);
+
+            
+
+            foreach (Object myObject in objectList)
+            {
+                string objectProperties = myObject.ToString();
+
+
+                List<String> classPropertyNames = new List<String>();
+                PropertyInfo[] propertyValues = myObject.GetType().GetProperties();
+                int i = 0;
+
+                foreach (PropertyInfo propertyValue in propertyValues)
+                {
+                    string fullProperty = propertyValues[i].ToString();
+                    string[] propertyName = fullProperty.Split(' ');
+                    classPropertyNames.Add(propertyName[1]);
+                    i++;
+                }
+            }
+
+
+
+            List<ListViewItem> list = new List<ListViewItem>();
+
             return list;
         }
 
@@ -134,13 +178,6 @@ namespace StackDocsFlow.TestService.Impl
             ChildTableNameAttribute descriptionAttribute = (ChildTableNameAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].Tag.GetType(), typeof(ChildTableNameAttribute));
             string tableName = descriptionAttribute.Name;
             return tableName;
-        }
-
-        private List<ListViewItem> GetListOfListViewItemsAccordingToGivenType(List<Object> objectList, ListView listView1)
-        {
-            List<ListViewItem> list = new List<ListViewItem>();
-
-            return list;
         }
 
         public int GetPageCount(ListView listView1)
