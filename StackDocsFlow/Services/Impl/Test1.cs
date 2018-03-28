@@ -142,7 +142,7 @@ namespace StackDocsFlow.TestService.Impl
 
             foreach (Object myObject in objectList)
             {
-                string objectProperties = myObject.ToString();
+                string[] objectProperties = myObject.ToString().Split(',');
 
 
                 List<String> classPropertyNames = new List<String>();

@@ -168,7 +168,7 @@ namespace StackDocsFlow.Services.Impl
         public List<Object> GetDataFromDB(string commandText)
         {
             sql_con.Open();
-            List<Object> list = sql_con.Query(commandText).ToList();
+            var list = sql_con.Query(commandText).ToList();
             sql_con.Close();
             return list;
         }
