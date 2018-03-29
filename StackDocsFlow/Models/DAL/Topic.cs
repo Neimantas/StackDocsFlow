@@ -20,5 +20,21 @@ namespace StackDocsFlow.Models.DatabaseModels
         public string Answer { get; set; }
         public string CreationDate { get; set; }
         public string LastEditDate { get; set; }
+
+        public Topic()
+        {
+        }
+
+        public Topic(int id, long docTagsId, string title, string answer, string creationDate, string lastEditDate)
+        {
+            Id = id;
+            DocTagId = docTagsId;
+            Title = title;
+            Answer = answer;
+            CreationDate = creationDate;
+            LastEditDate = lastEditDate;
+        }
+
+        
     }
 }

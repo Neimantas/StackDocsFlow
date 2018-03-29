@@ -115,7 +115,8 @@ namespace StackDocsFlow.TestService.Impl
             string tableName = GetTableNameAccordingModelClass(listView1);
             string childTableName = GetTableNameOfClickedElementChildClass(listView1);
             string childClassForeignKey = GetChildTableForeignIdName(listView1);
-            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(childTableName, childClassForeignKey, pageNumber, clickedItemId, language);
+            Type childClassType = GetChildClassType(listView1);
+            List<Object> listViewItemObjectList = _databaseService.GetOnePageListOfObjects(childTableName, childClassForeignKey, pageNumber, clickedItemId, childClassType, language);
             List<ListViewItem> list = GetListOfListViewItemsAccordingToGivenType(listViewItemObjectList, listView1);
             return list;
         }
@@ -123,24 +124,14 @@ namespace StackDocsFlow.TestService.Impl
         private List<ListViewItem> GetListOfListViewItemsAccordingToGivenType(List<Object> objectList, ListView listView1)
         {
 
+            foreach (Object o in objectList)
+            {
+                Topic topic = (Topic)o;          
+                    
+                
+            }
 
-
-            //List<Topic> topic = objectList.ConvertAll(x => new Topic(
-            //        Id = x,
-            //        DocTagId = x
-
-
-            //    ));
-
-
-
-
-
-            //var target = objectList.ConvertAll(x => (Topic)x);
-
-            
-
-            foreach (Object myObject in objectList)
+        foreach (Object myObject in objectList)
             {
                 string[] objectProperties = myObject.ToString().Split(',');
 
@@ -178,6 +169,13 @@ namespace StackDocsFlow.TestService.Impl
             ChildTableNameAttribute descriptionAttribute = (ChildTableNameAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].Tag.GetType(), typeof(ChildTableNameAttribute));
             string tableName = descriptionAttribute.Name;
             return tableName;
+        }
+
+        private static Type GetChildClassType(ListView listView1)
+        {
+            ChildClassTypeAttribute childClassAttribute = (ChildClassTypeAttribute)Attribute.GetCustomAttribute(listView1.SelectedItems[0].Tag.GetType(), typeof(ChildClassTypeAttribute));
+            Type type = childClassAttribute.Type;
+            return type;
         }
 
         public int GetPageCount(ListView listView1)

@@ -16,7 +16,6 @@ namespace StackDocsFlow.Models.DatabaseModels
     [ChildClassType(Type = typeof(Topic))]
     [ChildTableForeignIdName(Name = "DocTagId")]
     [ChildTableName(Name = "testJson")]
-    //[ChildClassName(Name = "Topic")]
     public class DocTags
     {
         public long Id { get; set; }

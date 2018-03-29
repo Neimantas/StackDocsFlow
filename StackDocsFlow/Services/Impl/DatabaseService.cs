@@ -157,20 +157,29 @@ namespace StackDocsFlow.Services.Impl
 
 
 
-        public List<Object> GetOnePageListOfObjects(string childTableName, string childClassForeignKey, int pageNumber, string clickedItemId, string language)
+        public List<Object> GetOnePageListOfObjects(string childTableName, string childClassForeignKey, int pageNumber, string clickedItemId, Type childClassType, string language)
         {
             pageNumber--;
             int off = pageNumber > 0 ? (20 * pageNumber) : 0;
-            List<Object> objectsList = GetDataFromDB("SELECT * FROM " + childTableName + " where " + childClassForeignKey + " = " + clickedItemId + " limit 20 offset " + off);
+            List<Object> objectsList = GetDataFromDB("SELECT * FROM " + childTableName + " where " + childClassForeignKey + " = " + clickedItemId + " limit 20 offset " + off, childClassType);
             return objectsList;
         }
 
-        public List<Object> GetDataFromDB(string commandText)
+        public List<Object> GetDataFromDB(string commandText, Type childClassType)
         {
+            List<Object> objectList = new List<Object>();
+
             sql_con.Open();
-            var list = sql_con.Query(commandText).ToList();
+            List<Topic> list = sql_con.Query<Topic>(commandText).ToList(); //?
             sql_con.Close();
-            return list;
+
+            foreach (Topic topic in list)
+            {
+                Object o = topic;
+                objectList.Add(topic);
+            }
+
+            return objectList;
         }
     }
 }
